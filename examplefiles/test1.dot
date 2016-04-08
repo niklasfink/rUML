@@ -1,0 +1,20 @@
+digraph G { 
+    fontname="Bitstream Vera Sans"
+    rankdir=LR 
+    layout="circo" 
+    node [fontname="Bitstream Vera Sans", fontsize=10.0] 
+    edge [fontname="Bitstream Vera Sans", fontsize=8.0, minlen=1, arrowsize=0.8, labeldistance=1.5, labelangle=35.0] 
+    // make the classes 
+    13948152 [shape=box, label="\<subject\> 
+Topic"]
+    13948080 [shape=record, label="Publisher|  | + publish ( Topic )\l"]
+    13947888 [shape=record, label="Subscriber A|  | + subscribe ( Topic )\l"]
+    13947780 [shape=record, label="Subscriber B|  | + subscribe ( Topic )\l"]
+    // make the associations relations 
+    13948080 -> 13948152 [label="", taillabel="publish
+to ", headlabel=" ", dir="both", arrowhead="vee", arrowtail="none"] 
+    13947888 -> 13948152 [label="", taillabel="subscr
+to ", headlabel=" ", dir="both", arrowhead="vee", arrowtail="none"] 
+    13947780 -> 13948152 [label="", taillabel="subscr
+to ", headlabel=" ", dir="both", arrowhead="vee", arrowtail="none"] 
+}

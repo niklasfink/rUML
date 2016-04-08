@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Projekt_SWB</title>
+	<style>
+		html {
+			font-family: Arial;
+			background-color: lightgrey;
+			height: 100%;
+		}
+
+		body {
+			max-width: 100%;
+		}
+
+		#header {
+			z-index: 3;
+			margin-left: auto;
+			margin-right: auto;
+			background-image: linear-gradient(to top, white 0%, lightblue 80%);
+			max-width: 960px;
+			height: 120px;
+			margin-top: 0;
+			padding-top: 0;
+			border-radius: 0 0 20px 20px;
+			position: relative;
+			overflow: hidden;
+		}
+
+		#NAME {
+			font-family: "Comic Sans MS";
+			font-size: 50px;
+			color: black;
+			text-align: center;
+			position: relative;
+			top: 50%;
+			-webkit-transform: translateY(-50%);
+			-ms-transform: translateY(-50%);
+			transform: translateY(-50%);
+			margin: 0;
+			padding: 0;
+		}
+
+		#sarcasm {
+			float: right;
+			font-size: 8px;
+			margin-top: 10px;
+			margin-right: 100px;
+		}
+
+		#text1 {
+			float: left;
+			margin-left: 120px;
+		}
+
+		#text2 {
+			float: right;
+			margin-right: 120px;
+		}
+
+		#input {
+			float: left;
+		}
+
+		#editor {
+			margin-left: 5px;
+			min-height: 400px;
+			max-height: 400px;
+			min-width: 600px;
+			max-width: 600px;
+		}
+
+		#go {
+			margin-left: 5px;
+			font-size: 30px;
+		}
+
+		#image {
+			margin-right: 5px;
+			float: right;
+			min-height: 400px;
+			max-height: 400px;
+			min-width: 600px;
+			max-width: 600px;
+		}
+
+		#ausgabeDIV {
+			margin-right: 5px;
+			float: right;
+			min-height: 400px;
+			max-height: 400px;
+			min-width: 600px;
+			max-width: 600px;
+		}
+
+		#get {
+			margin-top: 5px;
+			font-size: 30px;
+		}
+	</style>
+	<script
+	src="https://code.jquery.com/jquery-2.2.2.min.js"
+	integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+	crossorigin="anonymous"></script>
+	<script src="viz.js-1.3.0/viz.js"></script>
+</head>
+<body>
+	<div id="content">
+		<div id="input">
+			<h1 id="text1">UML Generator</h1>
+			<form id="form">
+				<textarea id="editor" placeholder="Type your code here"></textarea><br>
+				<button id="abschuss">Send</button>
+				<button id="testbtn">Canviz</button>
+			</form>
+		</div>
+			<script>
+				var gotlast = true;
+				var doit=function(e){
+					if(gotlast){
+						gotlast=false;
+						$.ajax({
+							type: 'POST',
+							url: 'http://localhost:3000/',
+							data: {
+								'code': $("#editor").val()
+							},
+							error: function () {
+								alert("Error occured! Try again")
+							},
+							success: function (data) {
+								$("#error").text("");
+								if(data.indexOf("ERROR") > -1 && !gotlast){
+									$("#error").text(data);
+								}else{
+									$("#graph_container").html(Viz(data, { format: "png-image-element" }));
+								}
+								gotlast=true;
+							}
+						});
+						e.preventDefault();
+					}
+				}
+				$("#abschuss").click(doit);
+				$("#editor").keyup(doit);
+		</script>
+
+		<div id="output">
+			<h1 id="text2"> Your generated UML</h1> <br>
+			<div id="graph_container"></div>
+			<div id="ausgabeDIV" contentEditable="false">
+				<span id="error"></span>
+				<img id="image" src=""/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
+
