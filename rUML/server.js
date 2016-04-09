@@ -12,9 +12,6 @@ var app = express();
 var json = require('json');
 var bodyParser = require('body-parser');
 var exec = require('child_process').exec; // dot liest und schreibt danach direkt. kann also spawn.write(dot code) und dann empfangen mit spawn.read(stdin PNGfile)
-var spawn = require('child_process').spawn;
-var dot = spawn('dot', ['-Tpng']);
-dot.stdin.setEncoding('utf-8');
 
 app.use(express.static('.'));
 app.use(bodyParser.urlencoded({
@@ -22,7 +19,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.get('/', function(req, res) {
-  console.log('GET /');
+	console.log('GET /');
 	//var html = '<html><body><form method="post" action="http://localhost:3000">Name: <input type="text" name="name" /><input type="submit" value="Submit" /></form></body>';
 	var html = fs.readFileSync('index.html');
 	res.writeHead(200, {
@@ -36,17 +33,12 @@ function replaceAll(str, find, replace) {
 }
 
 app.post('/', function(req, res) {
-	dot.stdout.on('data', function(data) {
-		res.end(data.toString('base64'));
-	});
-	dot.stderr.on('data', function(data) {
-		console.log('stderr: ' + data);
-	});
 	var code = req.body.code;
 	if (code === null) {
 		res.writeHead(500);
 		return;
 	}
+	code = "require './lib/_class.rb'\n" + code;
 	code = replaceAll(code, '"', '\\"');
 	code = code.replace(/(\r\n|\n|\r)/gm, "\" -e \"");
 	//console.log(code);
@@ -54,7 +46,7 @@ app.post('/', function(req, res) {
 		if (error) {
 			res.end("RUBY ERROR!");
 		} else if (stdout) {
-			dot.stdin.write(stdout + "\n");
+			res.end(stdout);
 		}
 	});
 });

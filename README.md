@@ -12,3 +12,5 @@ This is a tool built out of a project work at the University of Applied Science 
 1. Install ruby on your machine (pasting _ruby -e "puts 'Hello'"_ in your console needs to output "Hello")
 2. Install nodejs
 3. Run server.js
+
+A guide to GIT in german: https://rogerdudler.github.io/git-guide/index.de.html
