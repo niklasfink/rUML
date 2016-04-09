@@ -13,4 +13,5 @@ This is a tool built out of a project work at the University of Applied Science 
 2. Install nodejs
 3. Run server.js
 
-A guide to GIT in german: https://rogerdudler.github.io/git-guide/index.de.html
+
+A guide to GIT in German: https://rogerdudler.github.io/git-guide/index.de.html

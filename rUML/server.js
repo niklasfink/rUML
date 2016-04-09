@@ -11,22 +11,12 @@ var fs = require('fs');
 var app = express();
 var json = require('json');
 var bodyParser = require('body-parser');
-var exec = require('child_process').exec; // dot liest und schreibt danach direkt. kann also spawn.write(dot code) und dann empfangen mit spawn.read(stdin PNGfile)
+var exec = require('child_process').exec;
 
 app.use(express.static('.'));
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
-
-app.get('/', function(req, res) {
-	console.log('GET /');
-	//var html = '<html><body><form method="post" action="http://localhost:3000">Name: <input type="text" name="name" /><input type="submit" value="Submit" /></form></body>';
-	var html = fs.readFileSync('index.html');
-	res.writeHead(200, {
-		'Content-Type': 'text/html'
-	});
-	res.end(html);
-});
 
 function replaceAll(str, find, replace) {
 	return str.replace(new RegExp(find, 'g'), replace);
@@ -34,19 +24,24 @@ function replaceAll(str, find, replace) {
 
 app.post('/', function(req, res) {
 	var code = req.body.code;
-	if (code === null) {
-		res.writeHead(500);
+	if (!code) {
+		res.end("EMPTY ERROR");
 		return;
 	}
 	code = "require './lib/_class.rb'\n" + code;
 	code = replaceAll(code, '"', '\\"');
 	code = code.replace(/(\r\n|\n|\r)/gm, "\" -e \"");
-	//console.log(code);
-	exec('ruby -e "' + code + '"', function(error, stdout, stderr) {
+	var execcode = 'ruby -e "' + code + '"';
+	exec(execcode, function(error, stdout, stderr) {
+		console.log("stdout: " + stdout);
+		console.log("stderr: " + stderr);
+		console.log("error: " + error);
 		if (error) {
 			res.end("RUBY ERROR!");
 		} else if (stdout) {
 			res.end(stdout);
+		} else {
+			res.end("EMPTY ERROR");
 		}
 	});
 });
