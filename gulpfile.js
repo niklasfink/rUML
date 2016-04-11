@@ -3,8 +3,6 @@ var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var uglifycss = require('gulp-uglifycss');
-var connect = require('gulp-connect');
-var nodemon = require('gulp-nodemon');
 var gls = require('gulp-live-server');
 
 gulp.task('default', function() {
