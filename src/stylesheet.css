@@ -1,0 +1,82 @@
+html {
+    font-family     : Arial;
+    background-color: lightgrey;
+    height          : 100%;
+}
+body {
+    max-width: 100%;
+}
+#header {
+    z-index         : 3;
+    margin-left     : auto;
+    margin-right    : auto;
+    background-image: linear-gradient(to top, white 0%, lightblue 80%);
+    max-width       : 960px;
+    height          : 120px;
+    margin-top      : 0;
+    padding-top     : 0;
+    border-radius   : 0 0 20px 20px;
+    position        : relative;
+    overflow        : hidden;
+}
+#NAME {
+    font-family      : "Comic Sans MS";
+    font-size        : 50px;
+    color            : black;
+    text-align       : center;
+    position         : relative;
+    top              : 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform    : translateY(-50%);
+    transform        : translateY(-50%);
+    margin           : 0;
+    padding          : 0;
+}
+#sarcasm {
+    float       : right;
+    font-size   : 8px;
+    margin-top  : 10px;
+    margin-right: 100px;
+}
+#text1 {
+    float      : left;
+    margin-left: 120px;
+}
+#text2 {
+    float       : right;
+    margin-right: 120px;
+}
+#input {
+    float: left;
+}
+#editor {
+    margin-left: 5px;
+    min-height : 400px;
+    max-height : 400px;
+    min-width  : 600px;
+    max-width  : 600px;
+}
+#go {
+    margin-left: 5px;
+    font-size  : 30px;
+}
+#image {
+    margin-right: 5px;
+    float       : right;
+    min-height  : 400px;
+    max-height  : 400px;
+    min-width   : 600px;
+    max-width   : 600px;
+}
+#ausgabeDIV {
+    margin-right: 5px;
+    float       : right;
+    min-height  : 400px;
+    max-height  : 400px;
+    min-width   : 600px;
+    max-width   : 600px;
+}
+#get {
+    margin-top: 5px;
+    font-size : 30px;
+}

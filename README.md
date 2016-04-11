@@ -15,3 +15,5 @@ This is a tool built out of a project work at the University of Applied Science 
 
 
 A guide to GIT in German: https://rogerdudler.github.io/git-guide/index.de.html
+Clientside DOT conversion: https://github.com/mdaines/viz.js/
+Gulp introduction: https://semaphoreci.com/community/tutorials/getting-started-with-gulp-js
