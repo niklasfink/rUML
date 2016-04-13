@@ -1,10 +1,14 @@
 {
-	"devDependencies": {
+	"dependencies": {
 		"gulp": "latest",
 		"gulp-util": "latest",
 		"gulp-uglify": "latest",
 		"gulp-concat": "latest",
 		"gulp-connect": "latest",
-		"gulp-uglifycss": "latest"
+		"gulp-uglifycss": "latest",
+		"gulp-live-server": "latest",
+		"body-parser": "latest",
+		"express": "latest",
+		"viz.js": "latest"
 	}
 }
