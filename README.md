@@ -1,4 +1,7 @@
 ![rUML Logo](https://github.com/niklasfink/rUML/blob/master/img/rUML.png)
+
+![dependencies](https://david-dm.org/niklasfink/ruml.svg)
+
 # rUML
 A ruby to UML generator: Insert ruby object definitions on the one side, get a automatical aligned UML diagram on the other side.
 
