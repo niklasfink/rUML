@@ -1,6 +1,6 @@
 ![rUML Logo](https://github.com/niklasfink/rUML/blob/master/img/rUML.png)
 
-![dependencies](https://david-dm.org/niklasfink/ruml.svg)
+[![Dependency Status][dependencies-img-link]][dependencies-link]
 
 # rUML
 A ruby to UML generator: Insert ruby object definitions on the one side, get a automatical aligned UML diagram on the other side.
@@ -22,4 +22,8 @@ Clientside DOT conversion: https://github.com/mdaines/viz.js/
 Gulp introduction: https://semaphoreci.com/community/tutorials/getting-started-with-gulp-js  
 
 "[design](https://github.com/niklasfink/rUML/tree/design)" branch for design changes, main contributor @rasidmusic  
-"[improvements](https://github.com/niklasfink/rUML/tree/improvements)" branch for small improvements which dont fit in other branches  
+"[improvements](https://github.com/niklasfink/rUML/tree/improvements)" branch for small improvements which dont fit in other branches 
+
+
+[dependencies-img-link]: https://david-dm.org/niklasfink/ruml.svg
+[dependencies-link]: https://david-dm.org/niklasfink/ruml
