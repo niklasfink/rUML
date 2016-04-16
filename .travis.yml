@@ -1,0 +1,18 @@
+language: node_js
+node_js:
+  - "5"
+  - "4"
+
+before_script:
+  - npm install -g gulp
+script: gulp test
+
+addons:
+  sauce_connect:
+    username: "nudann"
+    access_key: "9dd12384-9a39-4411-b509-21d111250afd"
+  code_climate:
+      repo_token: f91e8a70a5a480a381b47c6e9f10f7aa62471f6afbf8f6ae713ea0dd4a7800c9
+
+after_script:
+  - codeclimate-test-reporter < lcov.info
