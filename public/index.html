@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projekt_SWB</title>
+    <script
+            src="https://code.jquery.com/jquery-2.2.2.min.js"
+            integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="
+            crossorigin="anonymous">
+
+    </script>
+    <script type="text/javascript" src="Projekt_SWB.js"></script>
+    <link rel="stylesheet" href="Projekt_SWB.css">
+
+</head>
+<!--<div id="header">
+<p id="NAME">Das ist das beste Programm ever</p>
+    <p id="sarcasm">ja, ComicSans</p>
+</div> -->
+
+<body>
+
+<div id="content">
+    <div id="input">
+        <h1 id="text1">Ruby Code</h1>
+        <form id="form" method="GET">
+            <textarea id="editor" placeholder="Type your Ruby Code here"></textarea>
+        </form>
+        <button id="go">Send</button>
+        <script>
+            data = $("#editor").text();
+            $("#go").click(function (e) {
+                $.ajax({
+                    url: 'http://localhost:4711',
+                    data: {
+                        rubyCode: data
+                    },
+                    error: function () {
+                        alert("Error occured! Try again")
+                    },
+                    success: function (data) {
+                        console.log(data);
+                        $("#image").attr("src", data)
+                    },
+                    type: 'GET'
+                });
+                e.preventDefault();
+            });
+        </script>
+    </div>
+
+    <div id="output">
+        <h1 id="text2"> Your generated UML</h1> <br>
+
+        <div id="ausgabeDIV" contentEditable="false">
+            <img id="image" src="http://placehold.it/900x3000"/>
+            <button id="get">Export</button>
+        </div>
+
+    </div>
+</div>
+</body>
+
+
