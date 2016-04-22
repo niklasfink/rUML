@@ -1,6 +1,3 @@
-engines:
-  eslint:
-    enabled: false
 exclude_paths:
   - node_modules/**
   - examplefiles/**
