@@ -1,3 +1,19 @@
+engines:
+  rubocop:
+    enabled: true
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    config:
+      languages:
+      - ruby
+      - javascript
+ratings:
+  paths:
+  - dist/**
 exclude_paths:
   - node_modules/**
   - examplefiles/**
