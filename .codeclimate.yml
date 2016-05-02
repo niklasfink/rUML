@@ -13,9 +13,12 @@ engines:
       - javascript
 ratings:
   paths:
-  - dist/**
+  - src/**
+  - "**.js"
+  - "**.rb"
+  - "**.css"
 exclude_paths:
   - node_modules/**
   - examplefiles/**
-  - dist/**
+  - src/**
   - img/**
