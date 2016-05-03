@@ -20,5 +20,6 @@ ratings:
 exclude_paths:
   - node_modules/**
   - examplefiles/**
-  - src/**
+  - dist/**
   - img/**
+  - viz.js
