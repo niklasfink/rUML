@@ -15,10 +15,11 @@ engines:
     enabled: true
 ratings:
   paths:
-  - src/**
   - "**.js"
   - "**.rb"
   - "**.css"
+  - "**.json"
+  - "**.md"
 exclude_paths:
   - node_modules/**
   - examplefiles/**
