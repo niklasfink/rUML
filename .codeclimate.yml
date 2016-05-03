@@ -22,4 +22,4 @@ exclude_paths:
   - examplefiles/**
   - dist/**
   - img/**
-  - viz.js
+  - "src/viz.js"
