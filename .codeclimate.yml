@@ -13,8 +13,6 @@ engines:
       - javascript
   markdownlint:
     enabled: true
-  nodesecurity:
-    enabled: true
 ratings:
   paths:
   - src/**
