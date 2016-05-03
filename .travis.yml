@@ -9,8 +9,3 @@ script: gulp serve # test case not implemented yet
 
 addons:
   sauce_connect: true
-  code_climate:
-    repo_token: f91e8a70a5a480a381b47c6e9f10f7aa62471f6afbf8f6ae713ea0dd4a7800c9
-
-after_script:
-  - codeclimate-test-reporter < lcov.info
