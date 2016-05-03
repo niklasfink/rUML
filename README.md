@@ -1,5 +1,6 @@
 ![rUML Logo](https://github.com/niklasfink/rUML/blob/master/img/rUML.png)
 
+[![Code Climate][cc-img-link]][cc-link]
 [![Dependency Status][dependencies-img-link]][dependencies-link] [![Gitter](https://badges.gitter.im/niklasfink/rUML.svg)](https://gitter.im/niklasfink/rUML?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # rUML
@@ -27,3 +28,5 @@ Gulp introduction: https://semaphoreci.com/community/tutorials/getting-started-w
 
 [dependencies-img-link]: https://david-dm.org/niklasfink/ruml.svg
 [dependencies-link]: https://david-dm.org/niklasfink/ruml
+[cc-img-link]: https://codeclimate.com/github/niklasfink/rUML/badges/gpa.svg
+[cc-link]: https://codeclimate.com/github/niklasfink/rUML
