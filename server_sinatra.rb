@@ -1,5 +1,6 @@
 require 'sinatra'
 require 'sinatra/json'
+require 'json'		#just because uncertainty
 
 
 
@@ -9,7 +10,7 @@ set :port, 4711     #setting port to 4711
 #set :bind, 127.0.0.1   #set the url/or ip
 #set :haml, :format => :html5   #for haml rendering, not in use
 set :public_folder, 'public'
-
+@bar
 
 get '/' do
 #  content_type 'html5'
@@ -17,9 +18,23 @@ get '/' do
 # redirect '/public/index.html'   #same effect, but some browser don't accept the redirection
 end
 
-post '/' do
-  json :foo => 'bar'
+# post '/foo' do
+#   json :rubyCode		#incoming"rubyCode", not the string, there is no string
+#   request.accept		#no use of this actually
+#   request.query_string
+# end
+post '/foo' do
+	params[:name]
+	content_type :json
+  { :data => 'value1'}.to_json
 end
+
+get '/rubyCode' do
+	puts params[:data]
+end
+#put '/index.output' do
+#	rubyCode
+#end
 
 # get "/" do
 #   t = %w[text/css text/html application/javascript]
