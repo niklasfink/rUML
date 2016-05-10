@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'sinatra/json'
 require 'json'		#just because uncertainty
-
+#require '_class.rb'	#working on binding _class.rb
 
 
 use Rack::Logger    #need for console log
@@ -24,17 +24,10 @@ end
 #   request.query_string
 # end
 post '/foo' do
-	params[:name]
+	params[:code]
 	content_type :json
-  { :data => 'value1'}.to_json
+  { :data => params[:code]}.to_json  #echo with the string
 end
-
-get '/rubyCode' do
-	puts params[:data]
-end
-#put '/index.output' do
-#	rubyCode
-#end
 
 # get "/" do
 #   t = %w[text/css text/html application/javascript]
