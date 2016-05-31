@@ -23,7 +23,7 @@ Clientside DOT conversion: https://github.com/mdaines/viz.js/
 Gulp introduction: https://semaphoreci.com/community/tutorials/getting-started-with-gulp-js  
 
 "[design](https://github.com/niklasfink/rUML/tree/design)" branch for design changes, main contributor @rasidmusic  
-"[improvements](https://github.com/niklasfink/rUML/tree/improvements)" branch for small improvements which dont fit in other branches
+"[improvements](https://github.com/niklasfink/rUML/tree/improvements)" branch for small improvements which dont fit in other branches  
 `git config --global core.longpaths true` long paths issue fix
 
 
