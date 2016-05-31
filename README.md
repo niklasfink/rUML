@@ -24,7 +24,7 @@ Gulp introduction: https://semaphoreci.com/community/tutorials/getting-started-w
 
 "[design](https://github.com/niklasfink/rUML/tree/design)" branch for design changes, main contributor @rasidmusic  
 "[improvements](https://github.com/niklasfink/rUML/tree/improvements)" branch for small improvements which dont fit in other branches
-´git config --global core.longpaths true´ long paths issue
+`git config --global core.longpaths true` long paths issue fix
 
 
 
