@@ -4,70 +4,96 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Projekt_SWB</title>
+	<!-- <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script> -->
+	<script src="jquery-2.2.2.min.js"></script>
+	<script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+	<link rel="stylesheet" href="codemirror/lib/codemirror.css">
+	<script src="codemirror/mode/ruby/ruby.js"></script>
+	<script type="text/javascript" src="viz.js"></script>
 	<link rel="stylesheet" href="styles.css">
-	<script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
-	<script src="viz.js"></script>
-	<script>
-		document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js"></' + 'script>')
-	</script>
 </head>
 
 <body>
 	<div id="content">
 		<div id="input">
-			<h1 id="text1">UML Generator</h1>
+			<h1 id="text1">UML Gen</h1>
 			<form id="form">
 				<textarea id="editor" placeholder="Type your code here"></textarea>
 				<br>
-				<button type='button' id="abschuss">Send</button>
+				<button type='button' id="go">Send</button>
 				<select id="outputformat">
 					<option selected value="png-image-element">PNG-Image</option>
 					<option value="svg">SVG</option>
 				</select>
 			</form>
 		</div>
+		<div id="bar">
+			<a href="index.html">
+				<img id="Logo" src="media/rUML_LogoPlusText.png"> </a>
+		</div>
+		<div class="cl-effect-4" id="menu">
+			<nav id="nav">
+				<ul>
+					<li class="hvr-underline-from-center"><a class="active" href="index.html">GENERATOR</a></li>
+					<li class="hvr-underline-from-center"><a href="How%20to.html">HOW TO</a></li>
+					<li class="hvr-underline-from-center" style="float: right"><a href="SignIn.html">SIGN IN</a></li>
+					<li class="hvr-underline-from-center" style="float: right"><a onclick="clicked();" href="">REGISTER</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div id="Titel">
+			<h1 id="text1"> Your Ruby Code</h1>
+			<h1 id="text2"> UML Preview</h1>
+		</div>
 
-		<script>
-			var gotlast = true;
-			var doit = function(e) {
-				if (gotlast) {
-					gotlast = false;
-					$.ajax({
-						type: 'POST',
-						url: 'http://localhost:3000/',
-						data: {
-							'code': $("#editor").val()
-						},
-						error: function() {
-							alert("Error occured! Try again")
-						},
-						success: function(data) {
-							$("#error").text("");
-							if (data.indexOf("ERROR") > -1 && !gotlast) {
-								$("#error").text(data);
-							} else {
-								$("#graph_container").html(Viz(data, {
-									format: $('#outputformat :selected').val()
-								}));
+
+		<div id="input">
+			<script>
+				var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
+					lineNumbers: true,
+					mode: "ruby",
+				});
+			</script>
+			<button class="hvr-hollow" id="go"><a>Send</a></button>
+			<script>
+				var gotlast = true;
+				var doit = function(e) {
+					if (gotlast) {
+						gotlast = false;
+						$.ajax({
+							type: 'POST',
+							url: 'http://localhost:3000/',
+							data: {
+								'code': $("#editor").val()
+							},
+							error: function() {
+								alert("Error occured! Try again")
+							},
+							success: function(data) {
+								$("#error").text("");
+								if (data.indexOf("ERROR") > -1 && !gotlast) {
+									$("#error").text(data);
+								} else {
+									$("#graph_container").html(Viz(data, {
+										format: $('#outputformat :selected').val()
+									}));
+								}
+								gotlast = true;
 							}
-							gotlast = true;
-						}
-					});
-					e.preventDefault();
+						});
+						e.preventDefault();
+					}
 				}
-			}
-			$("#abschuss").click(doit);
-			$("#editor").keyup(doit);
-		</script>
+				$("#go").click(doit);
+				$("#editor").keyup(doit);
+			</script>
+		</div>
 
 		<div id="output">
-			<h1 id="text2">
-										Your generated UML</h1>
-			<br>
-			<div id="ausgabeDIV" contentEditable="false">
-				<span id="error"></span>
-				<div id="graph_container"></div>
-			</div>
+			<button class="hvr-hollow" id="tab">
+			</button>
+			<button class="hvr-hollow" id="exp"><a onclick="button();">Export</a></button>
+			<button class="hvr-hollow" id="get"><a onclick="button();">Save</a></button>
 		</div>
 	</div>
 </body>
