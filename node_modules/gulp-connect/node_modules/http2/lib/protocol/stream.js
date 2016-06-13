@@ -567,8 +567,9 @@ Stream.prototype._transition = function transition(sending, frame) {
     //   can be used to close any of those streams.
     case 'CLOSED':
       if (PRIORITY || (sending && RST_STREAM) ||
+          (receiving && WINDOW_UPDATE) ||
           (receiving && this._closedByUs &&
-           (this._closedWithRst || WINDOW_UPDATE || RST_STREAM || ALTSVC))) {
+           (this._closedWithRst || RST_STREAM || ALTSVC))) {
         /* No state change */
       } else {
         streamError = 'STREAM_CLOSED';
@@ -624,7 +625,7 @@ Stream.prototype._transition = function transition(sending, frame) {
     // * When sending something invalid, throwing an exception, since it is probably a bug.
     if (sending) {
       this._log.error(info, 'Sending illegal frame.');
-      throw new Error('Sending illegal frame (' + frame.type + ') in ' + this.state + ' state.');
+      return this.emit('error', new Error('Sending illegal frame (' + frame.type + ') in ' + this.state + ' state.'));
     }
 
     // * In case of a serious problem, emitting and error and letting someone else handle it

@@ -13,6 +13,8 @@ var json = require('json');
 var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
 
+// ruby installed? check einbauen
+
 app.use(express.static(__dirname + '/public'));
 app.use(bodyParser.urlencoded({
 	extended: true
@@ -34,7 +36,7 @@ app.post('/', function(req, res) {
 	var execcode = 'ruby -e "' + code + '"';
 	exec(execcode, function(error, stdout, stderr) {
 		if (error) {
-			res.end("RUBY ERROR!");
+			res.end("RUBY ERROR! ERROR: " + error + " STDERR: " + stderr + "STDOUT: " + stdout);
 		} else if (stdout) {
 			res.end(stdout);
 		} else {

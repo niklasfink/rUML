@@ -9,6 +9,7 @@
 		"gulp-live-server": "latest",
 		"body-parser": "latest",
 		"express": "latest",
-		"viz.js": "latest"
+		"viz.js": "latest",
+		"codemirror": "latest"
 	}
 }

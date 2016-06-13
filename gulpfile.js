@@ -10,7 +10,7 @@ gulp.task('default', function() {
 });
 
 gulp.task('html', function() {
-	gulp.src('src/*.html')
+	gulp.src('src/**/*.html')
 		.pipe(gulp.dest('dist/public'));
 });
 
@@ -20,7 +20,7 @@ gulp.task('server', function() {
 });
 
 gulp.task('js', function() {
-	gulp.src(['src/*.js', '!src/server.js', '!src/*min.js'])
+	gulp.src(['src/**/*.js', '!src/server.js', '!src/*.min.js'])
 		.pipe(uglify())
 		.pipe(gulp.dest('dist/public'));
 });
@@ -47,7 +47,7 @@ gulp.task('serve', ['default', 'watch'], function() {
 	server.start();
 
 	//use gulp.watch to trigger server actions(notify, start or stop)
-	gulp.watch(['dist/public/**/*'], function(file) {
+	gulp.watch(['dist/public/*'], function(file) {
 		server.notify.apply(server, [file]);
 	});
 	//gulp.watch('dist/server.js', server.start.bind(server)); //restart my server
