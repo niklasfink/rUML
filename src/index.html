@@ -5,11 +5,10 @@
 	<meta charset="UTF-8">
 	<title>Projekt_SWB</title>
 	<!-- <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script> -->
-	<script src="jquery-2.2.2.min.js"></script>
 	<script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+	<script type="text/javascript" src="viz.js"></script>
 	<link rel="stylesheet" href="codemirror/lib/codemirror.css">
 	<script src="codemirror/mode/ruby/ruby.js"></script>
-	<script type="text/javascript" src="viz.js"></script>
 	<script src="//localhost:35729/livereload.js"></script>
 	<link rel="stylesheet" href="styles.css">
 </head>
@@ -43,6 +42,7 @@
 		<textarea id="editor"># Put your Ruby code here!</textarea>
 		<button class="hvr-hollow" id="go"><a>Send</a></button>
 		<button class="hvr-hollow" id="save"><a>Save ruby code</a></button>
+		<button class="hvr-hollow" id="load"><a>Load</a></button>
 		<select id="savedrumls">
 		</select>
 	</div>
@@ -51,7 +51,7 @@
 		<div id="graph_container"></div>
 		<button class="hvr-hollow" id="export"><a>Export</a></button>
 	</div>
-	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript" src="main.bundled.js"></script>
 </body>
 
 </html>

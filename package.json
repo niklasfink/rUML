@@ -1,15 +1,17 @@
 {
 	"dependencies": {
+		"body-parser": "latest",
+		"browserify": "^13.0.1",
+		"express": "latest",
 		"gulp": "latest",
-		"gulp-util": "latest",
-		"gulp-uglify": "latest",
 		"gulp-concat": "latest",
 		"gulp-connect": "latest",
-		"gulp-uglifycss": "latest",
 		"gulp-live-server": "latest",
-		"body-parser": "latest",
-		"express": "latest",
-		"viz.js": "latest",
-		"codemirror": "latest"
+		"gulp-uglify": "latest",
+		"gulp-uglifycss": "latest",
+		"gulp-util": "latest",
+		"jquery": "^3.0.0",
+		"vinyl-source-stream": "^1.1.0",
+		"viz.js": "latest"
 	}
 }
