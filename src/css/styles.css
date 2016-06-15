@@ -78,6 +78,12 @@ li a:hover:not(.active) {
 .active {
     background-color: rgba(227, 31, 46, 0.91);
 }
+button:focus,
+input:focus,
+select:focus,
+textarea:focus {
+    outline: none;
+}
 #Titel {
     background-color: rgba(255, 255, 255, 0.2);
     padding         : 0;
@@ -109,11 +115,10 @@ h1 {
     float  : right;
 }
 #input {
-    margin-top: 10px;
-    float     : left;
-    width     : 48%;
-    height    : 450px;
-    padding   : 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    float           : left;
+    width           : 48%;
+    height          : 459px;
 }
 #editor {
     margin        : 0;
@@ -128,23 +133,26 @@ h1 {
     height: 100%;
 }
 #output {
-    margin-top: 10px;
-    float     : right;
-    width     : 48%;
-    height    : 450px;
-    position  : relative;
+    background-color: rgba(255, 255, 255, 0.2);
+    float           : right;
+    width           : 48%;
+    height          : 459px;
+    position        : relative;
 }
 #Buttons {
     width: 100%;
 }
-#savebtn {
+#saveruby {
     margin-top: 4px;
     float     : left;
     font-size : 25px;
 }
 #savedialog {
-    float    : left;
-    max-width: 200px;
+    float      : left;
+    width      : 0;
+    overflow   : hidden;
+    height     : 55px;
+    white-space: nowrap;
 }
 .CodeMirror {
     height: 400px;
@@ -152,26 +160,27 @@ h1 {
 #savetext {
     padding-left    : 0;
     padding-right   : 0;
-    font-size       : 18px;
+    font-size       : 17px;
     color           : white;
-    background-color: rgba(24, 24, 24, 0.5);
-    border          : none;
-    width           : 0;
+    background-color: rgba(24,24,24,0.5);
+    border          : 0;
     height          : 51px;
     margin-top      : 4px;
     margin-left     : 4px;
+    padding         : 0 0 0 10px;
+    width           : 146px;
+    float           : left;
 }
-#saveicon {
+#savebtn {
     background-image   : url("/img/Checkwhite.png");
     background-position: center;
     background-size    : 30px;
     background-repeat  : no-repeat;
     border             : none;
-    width              : 0;
+    width              : 40px;
     font-size          : 25px;
     color              : white;
     background-color   : rgba(24, 24, 24, 0.5);
-    float              : right;
     height             : 51px;
     margin-top         : 4px;
     padding            : 0;
@@ -188,9 +197,9 @@ h1 {
     float      : right;
     font-size  : 25px;
 }
-#loaduml {
+#savedrumls {
     width           : 0;
-    font-size       : 25px;
+    font-size       : 20px;
     color           : white;
     background-color: rgba(24, 24, 24, 0.5);
     border          : 0;
@@ -207,7 +216,8 @@ h1 {
     width           : 137px;
     height          : 51px;
     margin-top      : 4px;
-    margin-left     : 609px;
+    float           : right;
+    margin-right    : 8px;
 }
 #export {
     margin-top: 4px;
@@ -805,5 +815,11 @@ div.CodeMirror-dragcursors {
 }
 /* Help users use markselection to safely style text background */
 span.CodeMirror-selectedtext {
+    background: none;
+}
+or-selectedtext {
+    background: none;
+}
+or-selectedtext {
     background: none;
 }

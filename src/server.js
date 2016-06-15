@@ -30,7 +30,13 @@ app.post('/', function(req, res) {
 		res.end("EMPTY ERROR");
 		return;
 	}
-	code = "require '" + __dirname + "/rb/_class.rb' \n" + code;
+	if (code.indexOf("ClassDiagram") > -1) {
+		code = "require '" + __dirname + "/rb/_class.rb' \n" + code;
+	} else if (code.indexOf("ComponentDiagram") > -1) {
+		code = "require '" + __dirname + "/rb/_cmp.rb' \n" + code;
+	} else if (code.indexOf("UseCaseDiagram") > -1) {
+		code = "require '" + __dirname + "/rb/_ucd.rb' \n" + code;
+	}
 	code = replaceAll(code, '"', '\\"');
 	code = code.replace(/(\r\n|\n|\r)/gm, "\" -e \"");
 	var execcode = 'ruby -e "' + code + '"';

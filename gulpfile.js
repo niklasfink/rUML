@@ -72,7 +72,7 @@ gulp.task('serve', ['default', 'watch'], function() {
 	server.start();
 
 	//use gulp.watch to trigger server actions(notify, start or stop)
-	gulp.watch(['dist/public/*'], function(file) {
+	gulp.watch(['dist/public/**/*'], function(file) {
 		server.notify.apply(server, [file]);
 	});
 	//gulp.watch('dist/server.js', server.start.bind(server)); //restart my server

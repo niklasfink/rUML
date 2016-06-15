@@ -56,39 +56,32 @@ $(document).ready(function() {
 		doit();
 	});
 
-	$("#savebtn").click(function() {
-		$("#savetext").animate({
-			padding: "0 10 0 10",
-			width: 125
-		});
-		$("#saveicon").animate({
-			width: 40
+	$("#saveruby").click(function() {
+		$("#savedialog").animate({
+			width: 200
 		});
 		$("#loaduml").animate({
 			width: 0
 		});
-
 	});
 
 	$("#load").click(function() {
-		$("#loaduml").animate({
-			width: 175
-		});
-		$("#savetext").animate({
-			padding: 0,
-			width: 0
-
-		});
-		$("#saveicon").animate({
-			width: 0
-		});
-
-		editor.setValue($('#savedrumls :selected').val());
-		doit();
+		if ($("#savedrumls").width() == 220) {
+			$("#savedrumls").animate({
+				width: 0
+			});
+		} else {
+			$("#savedrumls").animate({
+				width: 220
+			});
+		}
 	});
 
 	var loadUMLlist = function() {
 		var umls = [];
+		if (!localStorage.getItem("rubycode")) {
+			return;
+		}
 		var loadedUmls = CSVToArray(localStorage.getItem("rubycode"), ";")[0];
 		for (i = 0; i < loadedUmls.length; i++) {
 			var uml = CSVToArray(loadedUmls[i], ":")[0];
@@ -104,12 +97,32 @@ $(document).ready(function() {
 	};
 	loadUMLlist();
 
-	$("#save").click(function() {
+	$("#savedrumls").on('change', function() {
+		editor.setValue(this.value);
+		doit();
+	});
+
+	var saveUML = function() {
 		var encodedString = Base64.encode(editor.getValue());
-		var name = prompt("Please enter rUML diagram name:", "");
+		var name = $("#savetext").val() || "Diagram";
 		var temp = localStorage.getItem("rubycode") ? ";" + localStorage.getItem("rubycode") : "";
 		localStorage.setItem("rubycode", name + ":" + encodedString + (temp || ""));
 		loadUMLlist();
+		$("#savedialog").animate({
+			width: 0
+		});
+		$("#savetext").val("");
+	};
+
+	$("#savebtn").click(function() {
+		saveUML();
+	});
+
+	$('#savetext').keypress(function(e) {
+		if (e.which == 13) {
+			saveUML();
+			return false;
+		}
 	});
 
 	function mySnackbar() {

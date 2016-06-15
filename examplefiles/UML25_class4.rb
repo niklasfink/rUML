@@ -16,12 +16,12 @@ ClassDiagram "Library" do
   library.has bookItem, :right => "*"
   library.has account, :right => "*"
   library.owns catalog
-  
+
   customer.has account, :right => "1"
   customer.uses catalogIfce
 
   librarian.uses catalogIfce
-  
+
   bookItem.extends book
 
   catalog.implements catalogIfce

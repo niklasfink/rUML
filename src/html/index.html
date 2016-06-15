@@ -29,17 +29,16 @@
 		<h1 id="text2"> UML Preview</h1>
 	</div>
 
-
 	<div id="input">
 		<textarea id="editor"># Put your Ruby code here!</textarea>
 		<div id="Buttons">
-			<button class="hvr-hollowATT" id="savebtn"><a>Save Ruby Code</a></button>
-			<div id="savedialog">
+			<button class="hvr-hollowATT" id="saveruby"><a>Save Ruby Code</a></button>
+			<span id="savedialog">
 				<input id="savetext" placeholder="Filename" type="text">
-				<input id="saveicon" type="button">
-			</div>
+				<input id="savebtn" type="button">
+			</span>
 			<button class="hvr-hollow" id="load"><a>Load</a></button>
-			<select id="loaduml">
+			<select id="savedrumls">
 			</select>
 			<button class="hvr-hollow" id="go"><a>GO ►</a></button>
 		</div>
@@ -48,11 +47,11 @@
 	<div id="output">
 		<div id="graph_container"></div>
 		<div id="ButtonsEx">
+			<button class="hvr-hollow" id="export"><a id="Download">Download<img class="hvr-hollow" id="downloadicon" src="/img/downloadwhite.png"></a></button>
 			<select id="outputformat">
 				<option selected value="png-image-element">PNG</option>
 				<option value="svg">SVG</option>
 			</select>
-			<button class="hvr-hollow" id="export"><a id="Download">Download<img class="hvr-hollow" id="downloadicon" src="/img/downloadwhite.png"></a></button>
 		</div>
 	</div>
 	<script type="text/javascript" src="js/main.bundled.js"></script>
