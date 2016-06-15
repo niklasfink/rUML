@@ -173,12 +173,14 @@ h1 {
 }
 
 #savetext {
-    font-size: 25px;
+    padding-left: 0px;
+    padding-right: 0px;
+    font-size: 18px;
     color: white;
     background-color: rgba(24, 24, 24, 0.5);
     border: none;
     width: 0px;
-    height: 49px;
+    height: 51px;
     margin-top: 4px;
     margin-left: 4px;
 }
@@ -220,7 +222,7 @@ h1 {
     color: white;
     background-color: rgba(24, 24, 24, 0.5);
     border: 0;
-    height: 50px;
+    height: 51px;
     margin-top: 4px;
     margin-left: 4px;
     float: left;

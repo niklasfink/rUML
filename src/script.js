@@ -47,6 +47,7 @@ $("#go").click(doit);
 
 $("#savebtn").click(function () {
     $("#savetext").animate({
+        padding: "0 10 0 10",
         width: 125
     });
     $("#saveicon").animate({
@@ -61,10 +62,12 @@ $("#savebtn").click(function () {
 
 $("#load").click(function () {
     $("#loaduml").animate({
-        width: 125
+        width: 175
     });
     $("#savetext").animate({
+        padding: 0,
         width: 0
+
     });
     $("#saveicon").animate({
         width: 0
