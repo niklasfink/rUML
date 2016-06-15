@@ -1,1 +1,68 @@
-!function(t){"object"==typeof exports&&"object"==typeof module?t(require("../../lib/codemirror"),require("../yaml/yaml")):"function"==typeof define&&define.amd?define(["../../lib/codemirror","../yaml/yaml"],t):t(CodeMirror)}(function(t){var e=0,n=1,r=2;t.defineMode("yaml-frontmatter",function(i,a){function o(t){return t.state==r?f:u}var u=t.getMode(i,"yaml"),f=t.getMode(i,a&&a.base||"gfm");return{startState:function(){return{state:e,inner:t.startState(u)}},copyState:function(e){return{state:e.state,inner:t.copyState(o(e),e.inner)}},token:function(i,a){if(a.state==e)return i.match(/---/,!1)?(a.state=n,u.token(i,a.inner)):(a.state=r,a.inner=t.startState(f),f.token(i,a.inner));if(a.state==n){var o=i.sol()&&i.match(/---/,!1),c=u.token(i,a.inner);return o&&(a.state=r,a.inner=t.startState(f)),c}return f.token(i,a.inner)},innerMode:function(t){return{mode:o(t),state:t.inner}},blankLine:function(t){var e=o(t);return e.blankLine?e.blankLine(t.inner):void 0}}})});
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+(function (mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"), require("../yaml/yaml"))
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror", "../yaml/yaml"], mod)
+  else // Plain browser env
+    mod(CodeMirror)
+})(function (CodeMirror) {
+
+  var START = 0, FRONTMATTER = 1, BODY = 2
+
+  // a mixed mode for Markdown text with an optional YAML front matter
+  CodeMirror.defineMode("yaml-frontmatter", function (config, parserConfig) {
+    var yamlMode = CodeMirror.getMode(config, "yaml")
+    var innerMode = CodeMirror.getMode(config, parserConfig && parserConfig.base || "gfm")
+
+    function curMode(state) {
+      return state.state == BODY ? innerMode : yamlMode
+    }
+
+    return {
+      startState: function () {
+        return {
+          state: START,
+          inner: CodeMirror.startState(yamlMode)
+        }
+      },
+      copyState: function (state) {
+        return {
+          state: state.state,
+          inner: CodeMirror.copyState(curMode(state), state.inner)
+        }
+      },
+      token: function (stream, state) {
+        if (state.state == START) {
+          if (stream.match(/---/, false)) {
+            state.state = FRONTMATTER
+            return yamlMode.token(stream, state.inner)
+          } else {
+            state.state = BODY
+            state.inner = CodeMirror.startState(innerMode)
+            return innerMode.token(stream, state.inner)
+          }
+        } else if (state.state == FRONTMATTER) {
+          var end = stream.sol() && stream.match(/---/, false)
+          var style = yamlMode.token(stream, state.inner)
+          if (end) {
+            state.state = BODY
+            state.inner = CodeMirror.startState(innerMode)
+          }
+          return style
+        } else {
+          return innerMode.token(stream, state.inner)
+        }
+      },
+      innerMode: function (state) {
+        return {mode: curMode(state), state: state.inner}
+      },
+      blankLine: function (state) {
+        var mode = curMode(state)
+        if (mode.blankLine) return mode.blankLine(state.inner)
+      }
+    }
+  })
+});

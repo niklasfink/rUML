@@ -1,1 +1,195 @@
-!function(e){"object"==typeof exports&&"object"==typeof module?e(require("../../lib/codemirror")):"function"==typeof define&&define.amd?define(["../../lib/codemirror"],e):e(CodeMirror)}(function(e){function t(e,t){return"pairs"==t&&"string"==typeof e?e:"object"==typeof e&&null!=e[t]?e[t]:u[t]}function n(e){return function(t){return s(t,e)}}function r(e){var t=e.state.closeBrackets;if(!t)return null;var n=e.getModeAt(e.getCursor());return n.closeBrackets||t}function i(n){var i=r(n);if(!i||n.getOption("disableInput"))return e.Pass;for(var a=t(i,"pairs"),o=n.listSelections(),s=0;s<o.length;s++){if(!o[s].empty())return e.Pass;var l=c(n,o[s].head);if(!l||a.indexOf(l)%2!=0)return e.Pass}for(var s=o.length-1;s>=0;s--){var f=o[s].head;n.replaceRange("",h(f.line,f.ch-1),h(f.line,f.ch+1),"+delete")}}function a(n){var i=r(n),a=i&&t(i,"explode");if(!a||n.getOption("disableInput"))return e.Pass;for(var o=n.listSelections(),s=0;s<o.length;s++){if(!o[s].empty())return e.Pass;var l=c(n,o[s].head);if(!l||a.indexOf(l)%2!=0)return e.Pass}n.operation(function(){n.replaceSelection("\n\n",null),n.execCommand("goCharLeft"),o=n.listSelections();for(var e=0;e<o.length;e++){var t=o[e].head.line;n.indentLine(t,null,!0),n.indentLine(t+1,null,!0)}})}function o(t){var n=e.cmpPos(t.anchor,t.head)>0;return{anchor:new h(t.anchor.line,t.anchor.ch+(n?-1:1)),head:new h(t.head.line,t.head.ch+(n?1:-1))}}function s(n,i){var a=r(n);if(!a||n.getOption("disableInput"))return e.Pass;var s=t(a,"pairs"),c=s.indexOf(i);if(-1==c)return e.Pass;for(var u,d,g=t(a,"triples"),p=s.charAt(c+1)==i,v=n.listSelections(),m=c%2==0,b=0;b<v.length;b++){var x,C=v[b],P=C.head,d=n.getRange(P,h(P.line,P.ch+1));if(m&&!C.empty())x="surround";else if(!p&&m||d!=i)if(p&&P.ch>1&&g.indexOf(i)>=0&&n.getRange(h(P.line,P.ch-2),P)==i+i&&(P.ch<=2||n.getRange(h(P.line,P.ch-3),h(P.line,P.ch-2))!=i))x="addFour";else if(p){if(e.isWordChar(d)||!f(n,P,i))return e.Pass;x="both"}else{if(!m||n.getLine(P.line).length!=P.ch&&!l(d,s)&&!/\s/.test(d))return e.Pass;x="both"}else x=g.indexOf(i)>=0&&n.getRange(P,h(P.line,P.ch+3))==i+i+i?"skipThree":"skip";if(u){if(u!=x)return e.Pass}else u=x}var S=c%2?s.charAt(c-1):i,k=c%2?i:s.charAt(c+1);n.operation(function(){if("skip"==u)n.execCommand("goCharRight");else if("skipThree"==u)for(var e=0;3>e;e++)n.execCommand("goCharRight");else if("surround"==u){for(var t=n.getSelections(),e=0;e<t.length;e++)t[e]=S+t[e]+k;n.replaceSelections(t,"around"),t=n.listSelections().slice();for(var e=0;e<t.length;e++)t[e]=o(t[e]);n.setSelections(t)}else"both"==u?(n.replaceSelection(S+k,null),n.triggerElectric(S+k),n.execCommand("goCharLeft")):"addFour"==u&&(n.replaceSelection(S+S+S+S,"before"),n.execCommand("goCharRight"))})}function l(e,t){var n=t.lastIndexOf(e);return n>-1&&n%2==1}function c(e,t){var n=e.getRange(h(t.line,t.ch-1),h(t.line,t.ch+1));return 2==n.length?n:null}function f(t,n,r){var i=t.getLine(n.line),a=t.getTokenAt(n);if(/\bstring2?\b/.test(a.type))return!1;var o=new e.StringStream(i.slice(0,n.ch)+r+i.slice(n.ch),4);for(o.pos=o.start=a.start;;){var s=t.getMode().token(o,a.state);if(o.pos>=n.ch+1)return/\bstring2?\b/.test(s);o.start=o.pos}}var u={pairs:"()[]{}''\"\"",triples:"",explode:"[]{}"},h=e.Pos;e.defineOption("autoCloseBrackets",!1,function(t,n,r){r&&r!=e.Init&&(t.removeKeyMap(g),t.state.closeBrackets=null),n&&(t.state.closeBrackets=n,t.addKeyMap(g))});for(var d=u.pairs+"`",g={Backspace:i,Enter:a},p=0;p<d.length;p++)g["'"+d.charAt(p)+"'"]=n(d.charAt(p))});
+// CodeMirror, copyright (c) by Marijn Haverbeke and others
+// Distributed under an MIT license: http://codemirror.net/LICENSE
+
+(function(mod) {
+  if (typeof exports == "object" && typeof module == "object") // CommonJS
+    mod(require("../../lib/codemirror"));
+  else if (typeof define == "function" && define.amd) // AMD
+    define(["../../lib/codemirror"], mod);
+  else // Plain browser env
+    mod(CodeMirror);
+})(function(CodeMirror) {
+  var defaults = {
+    pairs: "()[]{}''\"\"",
+    triples: "",
+    explode: "[]{}"
+  };
+
+  var Pos = CodeMirror.Pos;
+
+  CodeMirror.defineOption("autoCloseBrackets", false, function(cm, val, old) {
+    if (old && old != CodeMirror.Init) {
+      cm.removeKeyMap(keyMap);
+      cm.state.closeBrackets = null;
+    }
+    if (val) {
+      cm.state.closeBrackets = val;
+      cm.addKeyMap(keyMap);
+    }
+  });
+
+  function getOption(conf, name) {
+    if (name == "pairs" && typeof conf == "string") return conf;
+    if (typeof conf == "object" && conf[name] != null) return conf[name];
+    return defaults[name];
+  }
+
+  var bind = defaults.pairs + "`";
+  var keyMap = {Backspace: handleBackspace, Enter: handleEnter};
+  for (var i = 0; i < bind.length; i++)
+    keyMap["'" + bind.charAt(i) + "'"] = handler(bind.charAt(i));
+
+  function handler(ch) {
+    return function(cm) { return handleChar(cm, ch); };
+  }
+
+  function getConfig(cm) {
+    var deflt = cm.state.closeBrackets;
+    if (!deflt) return null;
+    var mode = cm.getModeAt(cm.getCursor());
+    return mode.closeBrackets || deflt;
+  }
+
+  function handleBackspace(cm) {
+    var conf = getConfig(cm);
+    if (!conf || cm.getOption("disableInput")) return CodeMirror.Pass;
+
+    var pairs = getOption(conf, "pairs");
+    var ranges = cm.listSelections();
+    for (var i = 0; i < ranges.length; i++) {
+      if (!ranges[i].empty()) return CodeMirror.Pass;
+      var around = charsAround(cm, ranges[i].head);
+      if (!around || pairs.indexOf(around) % 2 != 0) return CodeMirror.Pass;
+    }
+    for (var i = ranges.length - 1; i >= 0; i--) {
+      var cur = ranges[i].head;
+      cm.replaceRange("", Pos(cur.line, cur.ch - 1), Pos(cur.line, cur.ch + 1), "+delete");
+    }
+  }
+
+  function handleEnter(cm) {
+    var conf = getConfig(cm);
+    var explode = conf && getOption(conf, "explode");
+    if (!explode || cm.getOption("disableInput")) return CodeMirror.Pass;
+
+    var ranges = cm.listSelections();
+    for (var i = 0; i < ranges.length; i++) {
+      if (!ranges[i].empty()) return CodeMirror.Pass;
+      var around = charsAround(cm, ranges[i].head);
+      if (!around || explode.indexOf(around) % 2 != 0) return CodeMirror.Pass;
+    }
+    cm.operation(function() {
+      cm.replaceSelection("\n\n", null);
+      cm.execCommand("goCharLeft");
+      ranges = cm.listSelections();
+      for (var i = 0; i < ranges.length; i++) {
+        var line = ranges[i].head.line;
+        cm.indentLine(line, null, true);
+        cm.indentLine(line + 1, null, true);
+      }
+    });
+  }
+
+  function contractSelection(sel) {
+    var inverted = CodeMirror.cmpPos(sel.anchor, sel.head) > 0;
+    return {anchor: new Pos(sel.anchor.line, sel.anchor.ch + (inverted ? -1 : 1)),
+            head: new Pos(sel.head.line, sel.head.ch + (inverted ? 1 : -1))};
+  }
+
+  function handleChar(cm, ch) {
+    var conf = getConfig(cm);
+    if (!conf || cm.getOption("disableInput")) return CodeMirror.Pass;
+
+    var pairs = getOption(conf, "pairs");
+    var pos = pairs.indexOf(ch);
+    if (pos == -1) return CodeMirror.Pass;
+    var triples = getOption(conf, "triples");
+
+    var identical = pairs.charAt(pos + 1) == ch;
+    var ranges = cm.listSelections();
+    var opening = pos % 2 == 0;
+
+    var type;
+    for (var i = 0; i < ranges.length; i++) {
+      var range = ranges[i], cur = range.head, curType;
+      var next = cm.getRange(cur, Pos(cur.line, cur.ch + 1));
+      if (opening && !range.empty()) {
+        curType = "surround";
+      } else if ((identical || !opening) && next == ch) {
+        if (triples.indexOf(ch) >= 0 && cm.getRange(cur, Pos(cur.line, cur.ch + 3)) == ch + ch + ch)
+          curType = "skipThree";
+        else
+          curType = "skip";
+      } else if (identical && cur.ch > 1 && triples.indexOf(ch) >= 0 &&
+                 cm.getRange(Pos(cur.line, cur.ch - 2), cur) == ch + ch &&
+                 (cur.ch <= 2 || cm.getRange(Pos(cur.line, cur.ch - 3), Pos(cur.line, cur.ch - 2)) != ch)) {
+        curType = "addFour";
+      } else if (identical) {
+        if (!CodeMirror.isWordChar(next) && enteringString(cm, cur, ch)) curType = "both";
+        else return CodeMirror.Pass;
+      } else if (opening && (cm.getLine(cur.line).length == cur.ch ||
+                             isClosingBracket(next, pairs) ||
+                             /\s/.test(next))) {
+        curType = "both";
+      } else {
+        return CodeMirror.Pass;
+      }
+      if (!type) type = curType;
+      else if (type != curType) return CodeMirror.Pass;
+    }
+
+    var left = pos % 2 ? pairs.charAt(pos - 1) : ch;
+    var right = pos % 2 ? ch : pairs.charAt(pos + 1);
+    cm.operation(function() {
+      if (type == "skip") {
+        cm.execCommand("goCharRight");
+      } else if (type == "skipThree") {
+        for (var i = 0; i < 3; i++)
+          cm.execCommand("goCharRight");
+      } else if (type == "surround") {
+        var sels = cm.getSelections();
+        for (var i = 0; i < sels.length; i++)
+          sels[i] = left + sels[i] + right;
+        cm.replaceSelections(sels, "around");
+        sels = cm.listSelections().slice();
+        for (var i = 0; i < sels.length; i++)
+          sels[i] = contractSelection(sels[i]);
+        cm.setSelections(sels);
+      } else if (type == "both") {
+        cm.replaceSelection(left + right, null);
+        cm.triggerElectric(left + right);
+        cm.execCommand("goCharLeft");
+      } else if (type == "addFour") {
+        cm.replaceSelection(left + left + left + left, "before");
+        cm.execCommand("goCharRight");
+      }
+    });
+  }
+
+  function isClosingBracket(ch, pairs) {
+    var pos = pairs.lastIndexOf(ch);
+    return pos > -1 && pos % 2 == 1;
+  }
+
+  function charsAround(cm, pos) {
+    var str = cm.getRange(Pos(pos.line, pos.ch - 1),
+                          Pos(pos.line, pos.ch + 1));
+    return str.length == 2 ? str : null;
+  }
+
+  // Project the token type that will exists after the given char is
+  // typed, and use it to determine whether it would cause the start
+  // of a string token.
+  function enteringString(cm, pos, ch) {
+    var line = cm.getLine(pos.line);
+    var token = cm.getTokenAt(pos);
+    if (/\bstring2?\b/.test(token.type)) return false;
+    var stream = new CodeMirror.StringStream(line.slice(0, pos.ch) + ch + line.slice(pos.ch), 4);
+    stream.pos = stream.start = token.start;
+    for (;;) {
+      var type1 = cm.getMode().token(stream, token.state);
+      if (stream.pos >= pos.ch + 1) return /\bstring2?\b/.test(type1);
+      stream.start = stream.pos;
+    }
+  }
+});

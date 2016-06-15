@@ -30,7 +30,7 @@ app.post('/', function(req, res) {
 		res.end("EMPTY ERROR");
 		return;
 	}
-	code = "require './dist/_class.rb' \n" + code;
+	code = "require '" + __dirname + "/rb/_class.rb' \n" + code;
 	code = replaceAll(code, '"', '\\"');
 	code = code.replace(/(\r\n|\n|\r)/gm, "\" -e \"");
 	var execcode = 'ruby -e "' + code + '"';

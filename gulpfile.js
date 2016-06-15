@@ -8,11 +8,24 @@ var browserify = require('browserify');
 var source = require('vinyl-source-stream');
 
 gulp.task('default', function() {
-	gulp.run(['html', 'js', 'css', 'server']);
+	gulp.run(['html', 'js', 'css', 'server', 'once']);
+});
+
+gulp.task('once', function() {
+	gulp.src('src/rb/**/*')
+		.pipe(gulp.dest('dist/rb'));
+	gulp.src('src/img/**/*')
+		.pipe(gulp.dest('dist/public/img'));
+	gulp.src('node_modules/codemirror/lib/codemirror.css')
+		.pipe(gulp.dest('dist/public/css'));
+	gulp.src('node_modules/codemirror/theme/monokai.css')
+		.pipe(gulp.dest('dist/public/css'));
+	gulp.src('node_modules/viz.js/viz.js')
+		.pipe(gulp.dest('dist/public/js'));
 });
 
 gulp.task('html', function() {
-	gulp.src('src/**/*.html')
+	gulp.src('src/html/*.html')
 		.pipe(gulp.dest('dist/public'));
 });
 
@@ -26,7 +39,7 @@ gulp.task('js', function() {
 	//	.pipe(uglify())
 	//	.pipe(gulp.dest('dist/public'));
 	return browserify({
-			entries: ['src/script.js']
+			entries: ['src/js/script.js', 'src/js/helperfunctions.js']
 		})
 		.bundle()
 		.on('error', function(err) {
@@ -34,24 +47,23 @@ gulp.task('js', function() {
 			this.emit("end");
 		})
 		.pipe(source('main.bundled.js'))
-		.pipe(gulp.dest('dist/public'));
+		.pipe(gulp.dest('dist/public/js'));
 });
 
 gulp.task('css', function() {
-	gulp.src('src/*.css')
+	gulp.src('src/css/*.css')
 		.pipe(uglifycss({
 			"uglyComments": true
 		}))
 		.pipe(concat('styles.css'))
-		.pipe(gulp.dest('dist/public'));
+		.pipe(gulp.dest('dist/public/css'));
 });
 
 gulp.task('watch', function() {
 	gulp.watch('src/server.js', ['server']);
-	gulp.watch('src/script.js', ['js']);
-	gulp.watch('src/helperfunctions.js', ['js']);
-	gulp.watch('src/*.css', ['css']);
-	gulp.watch('src/*.html', ['html']);
+	gulp.watch('src/js/*.js', ['js']);
+	gulp.watch('src/css/*.css', ['css']);
+	gulp.watch('src/html/*.html', ['html']);
 });
 
 gulp.task('serve', ['default', 'watch'], function() {

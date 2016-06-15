@@ -1,4 +1,4 @@
-![rUML Logo](https://github.com/niklasfink/rUML/blob/master/img/rUML.png)
+![rUML Logo](https://github.com/niklasfink/rUML/blob/master/gitimg/rUML.png)
 
 [![Code Climate][cc-img-link]][cc-link]
 [![Dependency Status][dependencies-img-link]][dependencies-link] [![Gitter](https://badges.gitter.im/niklasfink/rUML.svg)](https://gitter.im/niklasfink/rUML?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
@@ -7,7 +7,7 @@
 A ruby to UML generator: Insert ruby object definitions on the one side, get a automatical aligned UML diagram on the other side.
 
 ## Example
-![Example Conversion](https://github.com/niklasfink/rUML/blob/master/img/example%20conversion.png)
+![Example Conversion](https://github.com/niklasfink/rUML/blob/master/gitimg/example%20conversion.png)
 
 ## Motivation
 This is a tool built out of a project work at the University of Applied Science Esslingen in cooperation with professor Hans-Gerhard Groß
@@ -15,7 +15,9 @@ This is a tool built out of a project work at the University of Applied Science 
 ## Installation
 1. Install ruby on your machine (pasting `ruby -e "puts 'Hello'"` in your console needs to output "Hello")
 2. Install nodejs
-3. Run server.js
+3. Run `npm install` to load dependencies
+4. Run `gulp` to build project
+5. Run `gulp serve` to start up dev-system or `node ./dist/server.js` to start rUML
 
 
 A guide to GIT in German: https://rogerdudler.github.io/git-guide/index.de.html  
