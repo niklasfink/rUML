@@ -2,56 +2,62 @@
 <html lang="en">
 
 <head>
-	<meta charset="UTF-8">
-	<title>Projekt_SWB</title>
-	<!-- <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script> -->
-	<script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
-	<script type="text/javascript" src="viz.js"></script>
-	<link rel="stylesheet" href="codemirror/lib/codemirror.css">
-	<script src="codemirror/mode/ruby/ruby.js"></script>
-	<script src="//localhost:35729/livereload.js"></script>
-	<link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <title>rUML-Your Ruby to UML Converter</title>
+    <!-- <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script> -->
+    <script type="text/javascript" src="codemirror/lib/codemirror.js"></script>
+    <script type="text/javascript" src="viz.js"></script>
+    <link rel="stylesheet" href="codemirror/lib/codemirror.css">
+    <script src="codemirror/mode/ruby/ruby.js"></script>
+    <script src="//localhost:35729/livereload.js"></script>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-	<div id="bar">
-		<a href="index.html">
-			<img id="Logo" src="media/rUML_LogoPlusText.png"> </a>
-	</div>
-	<div class="cl-effect-4" id="menu">
-		<nav id="nav">
-			<ul>
-				<li class="hvr-underline-from-center"><a class="active" href="index.html">GENERATOR</a></li>
-				<li class="hvr-underline-from-center"><a href="How%20to.html">HOW TO</a></li>
-				<li class="hvr-underline-from-center" style="float: right"><a href="SignIn.html">SIGN IN</a></li>
-				<li class="hvr-underline-from-center" style="float: right"><a onclick="clicked();" href="">REGISTER</a></li>
-			</ul>
-		</nav>
-	</div>
-	<div id="Titel">
-		<h1 id="text1"> Your Ruby Code</h1>
-		<h1 id="text2"> UML Preview</h1>
-	</div>
+<div id="bar">
+    <a href="index.html">
+        <img id="Logo" src="media/rUML_LogoPlusText.png"> </a>
+</div>
+<div class="cl-effect-4" id="menu">
+    <nav id="nav">
+        <ul>
+            <li class="hvr-underline-from-center"><a class="active" href="index.html">GENERATOR</a></li>
+            <li style="float: right" class="hvr-underline-from-center"><a href="How%20to.html">HOW TO</a></li>
+        </ul>
+    </nav>
+</div>
+<div id="Titel">
+    <h1 id="text1"> Your Ruby Code</h1>
+    <h1 id="text2"> UML Preview</h1>
+</div>
 
 
-	<div id="input">
-		<select id="outputformat">
-			<option selected value="png-image-element">PNG-Image</option>
-			<option value="svg">SVG</option>
-		</select>
-		<textarea id="editor"># Put your Ruby code here!</textarea>
-		<button class="hvr-hollow" id="go"><a>Send</a></button>
-		<button class="hvr-hollow" id="save"><a>Save ruby code</a></button>
-		<button class="hvr-hollow" id="load"><a>Load</a></button>
-		<select id="savedrumls">
-		</select>
-	</div>
+<div id="input">
+    <textarea id="editor"># Put your Ruby code here!</textarea>
+    <div id="Buttons">
+        <button class="hvr-hollowATT" id="savebtn"><a>Save Ruby Code</a></button>
+        <div id="savedialog">
+            <input id="savetext" placeholder="Filename" type="text"><input id="saveicon" type="button">
+        </div>
+        <button class="hvr-hollow" id="load"><a>Load</a></button>
+        <select id="loaduml">
+        </select>
+        <button class="hvr-hollow" id="go"><a>GO ►</a></button>
+    </div>
+</div>
 
-	<div id="output">
-		<div id="graph_container"></div>
-		<button class="hvr-hollow" id="export"><a>Export</a></button>
-	</div>
-	<script type="text/javascript" src="main.bundled.js"></script>
+<div id="output">
+    <div id="graph_container"></div>
+    <div id="ButtonsEx">
+        <select id="outputformat">
+            <option selected value="png-image-element">PNG</option>
+            <option value="svg">SVG</option>
+            <option value="jpg">JPG</option>
+        </select>
+        <button class="hvr-hollow" id="export"><a id="Download">Download<img class="hvr-hollow" id="downloadicon" src="/media/downloadwhite.png"></a></button>
+    </div>
+</div>
+<script type="text/javascript" src="main.bundled.js"></script>
 </body>
 
 </html>
