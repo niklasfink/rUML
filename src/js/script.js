@@ -12,9 +12,6 @@ $(document).ready(function() {
 			var editorvalue = editor.getValue();
 			if (editorvalue.indexOf("ClassDiagram") > -1 || editorvalue.indexOf("UseCaseDiagram") > -1 || editorvalue.indexOf("ComponentDiagram") > -1) {
 				gotlast = false;
-				$("#graph_container").animate({
-					opacity: 0.0
-				}, 200);
 				$.ajax({
 					type: 'POST',
 					url: 'http://localhost:3000/',
@@ -33,9 +30,6 @@ $(document).ready(function() {
 							$("#graph_container").html(Viz(data, {
 								format: $('#outputformat :selected').val()
 							}));
-							$("#graph_container").animate({
-								opacity: 1.0
-							}, 100);
 						}
 						gotlast = true;
 					}
@@ -127,7 +121,7 @@ $(document).ready(function() {
 
 	function mySnackbar() {
 		// Get the snackbar DIV
-		var x = document.getElementById("snackbar")
+		var x = document.getElementById("snackbar");
 
 		// Add the "show" class to DIV
 		x.className = "show";
