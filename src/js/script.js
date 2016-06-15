@@ -50,14 +50,39 @@ $(document).ready(function() {
 		mode: "ruby",
 		extraKeys: {
 			'Ctrl-Space': 'autocomplete'
-		},
-		theme: "monokai"
+		}
 	});
 	editor.on('change', function() {
 		doit();
 	});
 
+	$("#savebtn").click(function() {
+		$("#savetext").animate({
+			padding: "0 10 0 10",
+			width: 125
+		});
+		$("#saveicon").animate({
+			width: 40
+		});
+		$("#loaduml").animate({
+			width: 0
+		});
+
+	});
+
 	$("#load").click(function() {
+		$("#loaduml").animate({
+			width: 175
+		});
+		$("#savetext").animate({
+			padding: 0,
+			width: 0
+
+		});
+		$("#saveicon").animate({
+			width: 0
+		});
+
 		editor.setValue($('#savedrumls :selected').val());
 		doit();
 	});
@@ -86,4 +111,17 @@ $(document).ready(function() {
 		localStorage.setItem("rubycode", name + ":" + encodedString + (temp || ""));
 		loadUMLlist();
 	});
+
+	function mySnackbar() {
+		// Get the snackbar DIV
+		var x = document.getElementById("snackbar")
+
+		// Add the "show" class to DIV
+		x.className = "show";
+
+		// After 3 seconds, remove the show class from DIV
+		setTimeout(function() {
+			x.className = x.className.replace("show", "");
+		}, 3000);
+	}
 });
