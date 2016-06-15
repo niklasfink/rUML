@@ -6,6 +6,9 @@ helper(window); //init
 
 $(document).ready(function() {
 	var gotlast = true;
+	// checks if keyword is present and sends data to the server.
+	// on positive answer, a graph is generated through viz.js
+	// on negative answer, an error message is shown
 	var doit = function(e) {
 		if (e) e.preventDefault();
 		if (gotlast) {
@@ -24,7 +27,7 @@ $(document).ready(function() {
 					success: function(data) {
 						$("#error").text("");
 						if (data.indexOf("ERROR") > -1 && !gotlast) {
-							alert(data);
+							//alert(data);
 							// should be an error textfield / snackbar
 						} else {
 							$("#graph_container").html(Viz(data, {
@@ -39,6 +42,7 @@ $(document).ready(function() {
 	};
 	$("#go").click(doit);
 
+	// enables the codemirror texteditor
 	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 		lineNumbers: true,
 		mode: "ruby",
@@ -71,6 +75,7 @@ $(document).ready(function() {
 		}
 	});
 
+	// load saved rUMLs from localStorage and decode code
 	var loadUMLlist = function() {
 		var umls = [];
 		if (!localStorage.getItem("rubycode")) {
@@ -96,6 +101,7 @@ $(document).ready(function() {
 		doit();
 	});
 
+	// save UML to localStorage and encode code with base64
 	var saveUML = function() {
 		var encodedString = Base64.encode(editor.getValue());
 		var name = $("#savetext").val() || "Diagram";
