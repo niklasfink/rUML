@@ -26,3 +26,4 @@ exclude_paths:
   - dist/**
   - img/**
   - "src/viz.js"
+  - "src/rb/**"
