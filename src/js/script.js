@@ -6,6 +6,9 @@ helper(window); //init
 
 $(document).ready(function() {
 	var gotlast = true;
+	//  _______ _______ __   _ ______   ______ _     _ ______  __   __
+	//  |______ |______ | \  | |     \ |_____/ |     | |_____]   \_/
+	//  ______| |______ |  \_| |_____/ |    \_ |_____| |_____]    |
 	// checks if keyword is present and sends data to the server.
 	// on positive answer, a graph is generated through viz.js
 	// on negative answer, an error message is shown
@@ -42,6 +45,9 @@ $(document).ready(function() {
 	};
 	$("#go").click(doit);
 
+	//  _______  _____  ______  _______ _______ _____  ______  ______  _____   ______
+	//  |       |     | |     \ |______ |  |  |   |   |_____/ |_____/ |     | |_____/
+	//  |_____  |_____| |_____/ |______ |  |  | __|__ |    \_ |    \_ |_____| |    \_
 	// enables the codemirror texteditor
 	var editor = CodeMirror.fromTextArea(document.getElementById("editor"), {
 		lineNumbers: true,
@@ -54,6 +60,9 @@ $(document).ready(function() {
 		doit();
 	});
 
+	//  ______  _______ __   _      _______ __   _ _____ _______ _______ _______ _____  _____  __   _
+	//  |_____]    |    | \  |      |_____| | \  |   |   |  |  | |_____|    |      |   |     | | \  |
+	//  |_____]    |    |  \_|      |     | |  \_| __|__ |  |  | |     |    |    __|__ |_____| |  \_|
 	$("#saveruby").click(function() {
 		$("#savedialog").animate({
 			width: 200
@@ -62,7 +71,6 @@ $(document).ready(function() {
 			width: 0
 		});
 	});
-
 	$("#load").click(function() {
 		if ($("#savedrumls").width() == 220) {
 			$("#savedrumls").animate({
@@ -75,6 +83,9 @@ $(document).ready(function() {
 		}
 	});
 
+	//          _____  _______ ______  _     _ _______        _______
+	//  |      |     | |_____| |     \ |     | |  |  | |      |______
+	//  |_____ |_____| |     | |_____/ |_____| |  |  | |_____ ______|
 	// load saved rUMLs from localStorage and decode code
 	var loadUMLlist = function() {
 		var umls = [];
@@ -101,6 +112,9 @@ $(document).ready(function() {
 		doit();
 	});
 
+	//  _______ _______ _    _ _______ _     _ _______
+	//  |______ |_____|  \  /  |______ |     | |  |  | |
+	//  ______| |     |   \/   |______ |_____| |  |  | |_____
 	// save UML to localStorage and encode code with base64
 	var saveUML = function() {
 		var encodedString = Base64.encode(editor.getValue());
