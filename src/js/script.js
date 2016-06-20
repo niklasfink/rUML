@@ -20,7 +20,7 @@ $(document).ready(function() {
 				gotlast = false;
 				$.ajax({
 					type: 'POST',
-					url: 'http://localhost:3000/',
+					url: 'http://api.ruml.io',
 					data: {
 						'code': editorvalue
 					},
