@@ -64,12 +64,19 @@ $(document).ready(function() {
 	//  |_____]    |    | \  |      |_____| | \  |   |   |  |  | |_____|    |      |   |     | | \  |
 	//  |_____]    |    |  \_|      |     | |  \_| __|__ |  |  | |     |    |    __|__ |_____| |  \_|
 	$("#saveruby").click(function() {
-		$("#savedialog").animate({
-			width: 200
-		});
+		if ($("#savedialog").width() == 200) {
+			$("#savedialog").animate({
+				width: 200
+			});
+		} else {
+			$("#savedialog").animate({
+				width: 200
+			});
+		}
 		$("#loaduml").animate({
 			width: 0
 		});
+
 	});
 	$("#load").click(function() {
 		if ($("#savedrumls").width() == 220) {

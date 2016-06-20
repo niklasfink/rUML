@@ -1,21 +1,21 @@
-//require('events').EventEmitter.prototype._maxListeners = 0;
-//http://stackoverflow.com/questions/5710358/how-to-retrieve-post-query-parameters-in-express
-//http://stackoverflow.com/questions/2496710/writing-files-in-node-js
-//http://stackoverflow.com/questions/1494492/graphviz-how-to-go-from-dot-to-a-graph
-//http://stackoverflow.com/questions/10802312/display-png-image-as-response-to-jquery-ajax-request
-//http://www.hacksparrow.com/base64-encoding-decoding-in-node-js.html
-// wichtig: http://stackoverflow.com/questions/10232192/exec-display-stdout-live
-// wichtiger: http://stackoverflow.com/questions/13230370/nodejs-child-process-write-to-stdin-from-an-already-initialised-process
 var express = require('express');
 var fs = require('fs');
 var app = express();
 var json = require('json');
 var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
+var cors = require('cors');
 
-// ruby installed? check einbauen
-
-app.use(express.static(__dirname + '/public'));
+var whitelist = ['http://ruml.io', 'http://alpha.ruml.io'];
+// ruby installed? implement check
+devMode = false;
+if (process.argv[2] == "development") {
+	devMode = true;
+}
+if (devMode) {
+	app.use(express.static(__dirname + '/public'));
+	console.log("true");
+}
 app.use(bodyParser.urlencoded({
 	extended: true
 }));
@@ -24,7 +24,17 @@ function replaceAll(str, find, replace) {
 	return str.replace(new RegExp(find, 'g'), replace);
 }
 
-app.post('/', function(req, res) {
+var corsOptions = {
+	origin: function(origin, callback) {
+		var originIsWhitelisted = whitelist.indexOf(origin) !== -1;
+		if (devMode) {
+			originIsWhitelisted = true;
+		}
+		callback(null, originIsWhitelisted);
+	}
+};
+
+app.post('/', cors(corsOptions), function(req, res) {
 	var code = req.body.code;
 	if (!code) {
 		res.end("EMPTY ERROR");
@@ -50,7 +60,9 @@ app.post('/', function(req, res) {
 		}
 	});
 });
-
 port = 3000;
+if (process.argv[2] >= 1 && process.argv[2] <= 65535) {
+	port = process.argv[2];
+}
 app.listen(port);
-console.log('Listening at http://localhost:' + port);
+console.log('Listening at ' + port + '. You can pass a port number as an argument: \'node server.js 1234\'');

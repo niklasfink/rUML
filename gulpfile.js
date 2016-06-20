@@ -68,7 +68,7 @@ gulp.task('watch', function() {
 
 gulp.task('serve', ['default', 'watch'], function() {
 	//1. run your script as a server
-	var server = gls.new('dist/server.js');
+	var server = gls.new(['dist/server.js', 'development']);
 	server.start();
 
 	//use gulp.watch to trigger server actions(notify, start or stop)
