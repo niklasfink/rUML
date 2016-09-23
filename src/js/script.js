@@ -13,14 +13,37 @@ $(document).ready(function() {
 	// on positive answer, a graph is generated through viz.js
 	// on negative answer, an error message is shown
 	var doit = function(e) {
-		if (e) e.preventDefault();
+
+		var transpile = Opal.compile(editor.getValue());
+		var standardlog = window.console.log;
+		var output = "";
+		try {
+			// Capture puts sentences
+			window.console.log = function(msg) {
+				output += msg;
+			};
+			res = eval(transpile);
+		} catch (compiled_error) {
+			error = compiled_error.message;
+		}
+		// Return to normal console
+		window.console.log = standardlog;
+		//var output = eval(transpile);
+		console.log("Output:");
+		console.log(output);
+		if (output) {
+			$("#graph_container").html(Viz(output, {
+				format: $('#outputformat :selected').val()
+			}));
+		}
+		/* if (e) e.preventDefault();
 		if (gotlast) {
 			var editorvalue = editor.getValue();
 			if (editorvalue.indexOf("ClassDiagram") > -1 || editorvalue.indexOf("UseCaseDiagram") > -1 || editorvalue.indexOf("ComponentDiagram") > -1) {
 				gotlast = false;
 				$.ajax({
 					type: 'POST',
-					url: 'http://api.ruml.io',
+					url: 'http://localhost:3000/',
 					data: {
 						'code': editorvalue
 					},
@@ -41,7 +64,7 @@ $(document).ready(function() {
 					}
 				});
 			}
-		}
+		}*/
 	};
 	$("#go").click(doit);
 

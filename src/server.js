@@ -5,6 +5,28 @@ var json = require('json');
 var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
 var cors = require('cors');
+var net = require('net');
+
+// Create an instance of the Server and waits for a connection
+net.createServer(function(sock) {
+	// Receives a connection - a socket object is associated to the connection automatically
+	console.log('CONNECTED: ' + sock.remoteAddress + ':' + sock.remotePort);
+	// Add a 'data' - "event handler" in this socket instance
+	sock.on('data', function(data) {
+		// data was received in the socket
+		// Writes the received message back to the socket (echo)
+		sock.write(data);
+	});
+	// Add a 'close' - "event handler" in this socket instance
+	sock.on('close', function(data) {
+		// closed connection
+		console.log('CLOSED: ' + sock.remoteAddress + ' ' + sock.remotePort);
+	});
+	sock.on('error', function(data) {
+		// closed connection
+		console.log('ERROR: ' + sock.remoteAddress + ' ' + sock.remotePort);
+	});
+}).listen(5668, "127.0.0.1");
 
 var whitelist = ['http://ruml.io', 'http://alpha.ruml.io'];
 // ruby installed? implement check
@@ -40,6 +62,7 @@ app.post('/', cors(corsOptions), function(req, res) {
 		res.end("EMPTY ERROR");
 		return;
 	}
+	sock.write(code);
 	if (code.indexOf("ClassDiagram") > -1) {
 		code = "require '" + __dirname + "/rb/_class.rb' \n" + code;
 	} else if (code.indexOf("ComponentDiagram") > -1) {

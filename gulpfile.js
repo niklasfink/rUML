@@ -6,9 +6,14 @@ var uglifycss = require('gulp-uglifycss');
 var gls = require('gulp-live-server');
 var browserify = require('browserify');
 var source = require('vinyl-source-stream');
+var stripCode = require('gulp-strip-code');
 
 gulp.task('default', function() {
 	gulp.run(['html', 'js', 'css', 'server', 'once']);
+});
+
+gulp.task('default-dev', function() {
+	gulp.run(['html-dev', 'js', 'css', 'server', 'once']);
 });
 
 gulp.task('once', function() {
@@ -25,6 +30,14 @@ gulp.task('once', function() {
 });
 
 gulp.task('html', function() {
+	gulp.src('src/html/*.html')
+		.pipe(stripCode({
+			pattern: "<script src=\"\/\/localhost:35729\/livereload.js\"><\/script>"
+		}))
+		.pipe(gulp.dest('dist/public'));
+});
+
+gulp.task('html-dev', function() {
 	gulp.src('src/html/*.html')
 		.pipe(gulp.dest('dist/public'));
 });
@@ -63,10 +76,10 @@ gulp.task('watch', function() {
 	gulp.watch('src/server.js', ['server']);
 	gulp.watch('src/js/*.js', ['js']);
 	gulp.watch('src/css/*.css', ['css']);
-	gulp.watch('src/html/*.html', ['html']);
+	gulp.watch('src/html/*.html', ['html-dev']);
 });
 
-gulp.task('serve', ['default', 'watch'], function() {
+gulp.task('serve', ['default-dev', 'watch'], function() {
 	//1. run your script as a server
 	var server = gls.new(['dist/server.js', 'development']);
 	server.start();

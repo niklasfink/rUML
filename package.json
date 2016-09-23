@@ -9,6 +9,7 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^4.1.0",
     "gulp-live-server": "0.0.30",
+    "gulp-strip-code": "^0.1.4",
     "gulp-uglify": "^1.5.3",
     "gulp-uglifycss": "^1.0.6",
     "gulp-util": "^3.0.7",

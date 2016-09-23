@@ -6,6 +6,8 @@
 	<title>rUML-Your Ruby to UML Converter</title>
 	<script type="text/javascript" src="js/viz.js"></script>
 	<script src="//localhost:35729/livereload.js"></script>
+	<script type="text/javascript" src="http://cdn.opalrb.org/opal/current/opal.min.js"></script>
+	<script type="text/javascript" src="http://cdn.opalrb.org/opal/current/opal-parser.min.js"></script>
 	<link rel="stylesheet" href="css/codemirror.css">
 	<link rel="stylesheet" href="css/monokai.css">
 	<link rel="stylesheet" href="css/styles.css">
@@ -47,7 +49,7 @@
 	<div id="output">
 		<div id="graph_container"></div>
 		<div id="ButtonsEx">
-			<button class="hvr-hollow" id="export"><a id="Download">Download<img class="hvr-hollow" id="downloadicon" src="/img/downloadwhite.png"></a></button>
+			<button class="hvr-hollow" id="export"><a id="Download">Download<img class="hvr-hollow" id="downloadicon" src="/img/Downloadwhite.png"></a></button>
 			<select id="outputformat">
 				<option selected value="png-image-element">PNG</option>
 				<option value="svg">SVG</option>
@@ -55,6 +57,9 @@
 		</div>
 	</div>
 	<script type="text/javascript" src="js/main.bundled.js"></script>
+	<script type="text/javascript">
+		Opal.load('opal-parser')
+	</script>
 </body>
 
 </html>
