@@ -45,6 +45,15 @@ $(document).ready(function() {
 	};
 	$("#go").click(doit);
 
+	var $loading = $('#loading').hide();
+	$(document)
+		.ajaxStart(function() {
+			$loading.show();
+		})
+		.ajaxStop(function() {
+			$loading.hide();
+		});
+
 	//  _______  _____  ______  _______ _______ _____  ______  ______  _____   ______
 	//  |       |     | |     \ |______ |  |  |   |   |_____/ |_____/ |     | |_____/
 	//  |_____  |_____| |_____/ |______ |  |  | __|__ |    \_ |    \_ |_____| |    \_
@@ -56,8 +65,10 @@ $(document).ready(function() {
 			'Ctrl-Space': 'autocomplete'
 		}
 	});
+	var timeout;
 	editor.on('change', function() {
-		doit();
+		clearTimeout(timeout);
+		timeout = setTimeout(doit, 500);
 	});
 
 	//  ______  _______ __   _      _______ __   _ _____ _______ _______ _______ _____  _____  __   _

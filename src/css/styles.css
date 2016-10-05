@@ -1,6 +1,7 @@
 html {
     height: 100%;
 }
+
 body {
     max-width      : 100%;
     max-height     : 100%;
@@ -8,18 +9,31 @@ body {
     background-size: cover;
     font-family    : sans-serif;
 }
+
 html::-webkit-scrollbar {
     display: none;
 }
+
 #bar {
     background-color: rgba(255, 255, 255, 0.2);
     text-align      : center;
     height          : 100px;
     padding-bottom  : 1em;
 }
+
 #Logo {
     height: 100px;
 }
+
+#loading {
+    position   : absolute;
+    width      : 100%;
+    padding-top: 110px;
+    text-align : center;
+    background : rgba(0,0,0,0.2);
+    height     : 290px;
+}
+
 .hvr-underline-from-center {
     display                    : inline-block;
     vertical-align             : middle;
@@ -32,12 +46,14 @@ html::-webkit-scrollbar {
     position                   : relative;
     overflow                   : hidden;
 }
+
 .hvr-underline-from-center:active:before,
 .hvr-underline-from-center:focus:before,
 .hvr-underline-from-center:hover:before {
     left : 0;
     right: 0;
 }
+
 .hvr-underline-from-center:before {
     content                           : "";
     position                          : absolute;
@@ -54,6 +70,7 @@ html::-webkit-scrollbar {
     -webkit-transition-timing-function: ease-out;
     transition-timing-function        : ease-out;
 }
+
 ul {
     list-style-type : none;
     margin          : 0;
@@ -61,9 +78,11 @@ ul {
     overflow        : hidden;
     background-color: rgb(24, 24, 24);
 }
+
 li {
     float: left;
 }
+
 li a {
     display        : block;
     color          : white;
@@ -71,19 +90,23 @@ li a {
     padding        : 14px 16px;
     text-decoration: none;
 }
+
 li a:hover:not(.active) {
     background-color   : rgba(214, 0, 15, 0.49);
     transition-duration: 0.5s;
 }
+
 .active {
     background-color: rgba(227, 31, 46, 0.91);
 }
+
 button:focus,
 input:focus,
 select:focus,
 textarea:focus {
     outline: none;
 }
+
 #Titel {
     background-color: rgba(255, 255, 255, 0.2);
     padding         : 0;
@@ -93,6 +116,7 @@ textarea:focus {
     width           : 100%;
     text-align      : center;
 }
+
 #Titel2 {
     background-color: rgba(255, 255, 255, 0.2);
     padding         : 0;
@@ -100,26 +124,31 @@ textarea:focus {
     height          : 70px;
     text-align      : left;
 }
+
 h1 {
     padding: 0;
     margin : 0;
 }
+
 #text1 {
     margin : 4px 0 0;
     padding: 14px 16px;
     float  : left;
 }
+
 #text2 {
     margin : 4px 0 0;
     padding: 14px 16px;
     float  : right;
 }
+
 #input {
     background-color: rgba(255, 255, 255, 0.2);
     float           : left;
     width           : 48%;
     height          : 459px;
 }
+
 #editor {
     margin        : 0;
     padding-bottom: 2px;
@@ -128,10 +157,12 @@ h1 {
     height        : 450px;
     resize        : none;
 }
+
 #image {
     width : 100%;
     height: 100%;
 }
+
 #output {
     background-color: rgba(255, 255, 255, 0.2);
     float           : right;
@@ -139,14 +170,17 @@ h1 {
     height          : 459px;
     position        : relative;
 }
+
 #Buttons {
     width: 100%;
 }
+
 #saveruby {
     margin-top: 4px;
     float     : left;
     font-size : 25px;
 }
+
 #savedialog {
     float      : left;
     width      : 0;
@@ -154,9 +188,11 @@ h1 {
     height     : 55px;
     white-space: nowrap;
 }
+
 .CodeMirror {
     height: 400px;
 }
+
 #savetext {
     padding-left    : 0;
     padding-right   : 0;
@@ -171,6 +207,7 @@ h1 {
     width           : 146px;
     float           : left;
 }
+
 #savebtn {
     background-image   : url("/img/Checkwhite.png");
     background-position: center;
@@ -185,18 +222,21 @@ h1 {
     margin-top         : 4px;
     padding            : 0;
 }
+
 #load {
     margin-top : 4px;
     margin-left: 4px;
     float      : left;
     font-size  : 25px;
 }
+
 #go {
     margin-left: 4px;
     margin-top : 4px;
     float      : right;
     font-size  : 25px;
 }
+
 #savedrumls {
     width           : 0;
     font-size       : 20px;
@@ -208,6 +248,7 @@ h1 {
     margin-left     : 4px;
     float           : left;
 }
+
 #outputformat {
     font-size       : 25px;
     color           : white;
@@ -219,70 +260,85 @@ h1 {
     float           : right;
     margin-right    : 8px;
 }
+
 #export {
     margin-top: 4px;
     float     : right;
 }
+
 #Download {
     float: left;
 }
+
 #downloadicon {
     margin-left : 13px;
     margin-right: 5px;
     float       : right;
     height      : 22px;
 }
+
 #tab {
     font-size      : 25px;
     text-decoration: none;
     float          : left;
 }
+
 #get {
     float       : right;
     font-size   : 25px;
     border-right: 1px solid black;
 }
+
 #exp {
     font-size: 25px;
     float    : right;
 }
+
 #graph_container {
     height          : 400px;
     background-color: rgba(255, 255, 255, 0.6);
     overflow-y      : scroll;
     overflow-x      : scroll;
 }
+
 button {
     border          : none;
     background-color: rgb(24, 24, 24);
     padding         : 0.3em 0.5em;
     margin-bottom   : 0.1em;
 }
+
 button a {
     color         : white;
     vertical-align: middle;
     font-size     : 20px;
     font-weight   : lighter;
 }
+
 button a:link {
     color          : white;
     text-decoration: none;
 }
+
 button a:hover {
     text-decoration: none;
 }
+
 button a:active {
     text-decoration: none;
 }
+
 button a:visited {
     color: white;
 }
+
 button {
     padding    : 0;
     color      : white;
     border     : 0;
     font-weight: bold;
 }
+
 button a {
     display        : block;
     color          : white;
@@ -290,6 +346,7 @@ button a {
     padding        : 14px 16px;
     text-decoration: none;
 }
+
 button a:hover:not(.active) {
     background-color   : rgba(214, 0, 15, 0.45);
     transition-duration: 0.5s;
@@ -298,10 +355,12 @@ button a:hover:not(.active) {
 #sign {
     text-align: center;
 }
+
 .login-page {
     width : 360px;
     margin: auto;
 }
+
 .form {
     position  : relative;
     z-index   : 1;
@@ -312,6 +371,7 @@ button a:hover:not(.active) {
     text-align: center;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
 }
+
 .form input {
     font-family: "Roboto", sans-serif;
     outline    : 0;
@@ -322,6 +382,7 @@ button a:hover:not(.active) {
     box-sizing : border-box;
     font-size  : 14px;
 }
+
 .form button {
     font-family       : "Roboto", sans-serif;
     text-transform    : uppercase;
@@ -336,39 +397,47 @@ button a:hover:not(.active) {
     transition        : all 0.3 ease;
     cursor            : pointer;
 }
+
 .form button:active,
 .form button:focus,
 .form button:hover {
     background: rgba(227, 31, 46, 0.91);
 }
+
 .form .message {
     margin   : 15px 0 0;
     color    : #b3b3b3;
     font-size: 12px;
 }
+
 .form .message a {
     color          : #af000d;
     text-decoration: none;
 }
+
 .form .register-form {
     display: none;
 }
+
 .container {
     position : relative;
     z-index  : 1;
     max-width: 300px;
     margin   : 0 auto;
 }
+
 .container:after,
 .container:before {
     content: "";
     display: block;
     clear  : both;
 }
+
 .container .info {
     margin    : 50px auto;
     text-align: center;
 }
+
 .container .info h1 {
     margin     : 0 0 15px;
     padding    : 0;
@@ -376,22 +445,28 @@ button a:hover:not(.active) {
     font-weight: 300;
     color      : #1a1a1a;
 }
+
 .container .info span {
     color    : black;
     font-size: 12px;
 }
+
 .container .info span a {
     color          : #000000;
     text-decoration: none;
 }
+
 .container .info span .fa {
     color: #EF3B3A;
 }
+
 .hvr-hollowATT:hover {}
+
 #Anleitung {
     background-color: rgba(0, 0, 0, 0.6);
     text-align      : center;
 }
+
 #video {
     border: 4px solid black;
     margin: 10px;
@@ -408,10 +483,12 @@ button a:hover:not(.active) {
     padding: 4px 0;
     /* Vertical padding around content */
 }
+
 .CodeMirror pre {
     padding: 0 4px;
     /* Horizontal padding of content */
 }
+
 .CodeMirror-gutter-filler,
 .CodeMirror-scrollbar-filler {
     background-color: white;
@@ -423,7 +500,9 @@ button a:hover:not(.active) {
     background-color: rgb(24, 24, 24);
     white-space     : nowrap;
 }
+
 .CodeMirror-linenumbers {}
+
 .CodeMirror-linenumber {
     padding    : 0 3px 0 5px;
     min-width  : 20px;
@@ -431,9 +510,11 @@ button a:hover:not(.active) {
     color      : white;
     white-space: nowrap;
 }
+
 .CodeMirror-guttermarker {
     color: black;
 }
+
 .CodeMirror-guttermarker-subtle {
     color: #999;
 }
@@ -447,14 +528,17 @@ button a:hover:not(.active) {
 .CodeMirror div.CodeMirror-secondarycursor {
     border-left: 1px solid silver;
 }
+
 .cm-fat-cursor .CodeMirror-cursor {
     width     : auto;
     border    : 0;
     background: #7e7;
 }
+
 .cm-fat-cursor div.CodeMirror-cursors {
     z-index: 1;
 }
+
 .cm-animate-fat-cursor {
     width            : auto;
     border           : 0;
@@ -465,31 +549,39 @@ button a:hover:not(.active) {
 }
 @-moz-keyframes blink {
     0% {}
+
     50% {
         background-color: transparent;
     }
+
     100% {}
 }
 @-webkit-keyframes blink {
     0% {}
+
     50% {
         background-color: transparent;
     }
+
     100% {}
 }
 @keyframes blink {
     0% {}
+
     50% {
         background-color: transparent;
     }
+
     100% {}
 }
 /* Can style cursor different in overwrite (non-insert) mode */
 .CodeMirror-overwrite .CodeMirror-cursor {}
+
 .cm-tab {
     display        : inline-block;
     text-decoration: inherit;
 }
+
 .CodeMirror-ruler {
     border-left: 1px solid #ccc;
     position   : absolute;
@@ -498,89 +590,117 @@ button a:hover:not(.active) {
 .cm-s-default .cm-header {
     color: blue;
 }
+
 .cm-s-default .cm-quote {
     color: #090;
 }
+
 .cm-negative {
     color: #d44;
 }
+
 .cm-positive {
     color: #292;
 }
+
 .cm-header,
 .cm-strong {
     font-weight: bold;
 }
+
 .cm-em {
     font-style: italic;
 }
+
 .cm-link {
     text-decoration: underline;
 }
+
 .cm-strikethrough {
     text-decoration: line-through;
 }
+
 .cm-s-default .cm-keyword {
     color: #708;
 }
+
 .cm-s-default .cm-atom {
     color: #219;
 }
+
 .cm-s-default .cm-number {
     color: #164;
 }
+
 .cm-s-default .cm-def {
     color: #00f;
 }
+
 .cm-s-default .cm-operator,
 .cm-s-default .cm-property,
 .cm-s-default .cm-punctuation,
 .cm-s-default .cm-variable {}
+
 .cm-s-default .cm-variable-2 {
     color: #05a;
 }
+
 .cm-s-default .cm-variable-3 {
     color: #085;
 }
+
 .cm-s-default .cm-comment {
     color: #a50;
 }
+
 .cm-s-default .cm-string {
     color: #a11;
 }
+
 .cm-s-default .cm-string-2 {
     color: #f50;
 }
+
 .cm-s-default .cm-meta {
     color: #555;
 }
+
 .cm-s-default .cm-qualifier {
     color: #555;
 }
+
 .cm-s-default .cm-builtin {
     color: #30a;
 }
+
 .cm-s-default .cm-bracket {
     color: #997;
 }
+
 .cm-s-default .cm-tag {
     color: #170;
 }
+
 .cm-s-default .cm-attribute {
     color: #00c;
 }
+
 .cm-s-default .cm-hr {
     color: #999;
 }
+
 .cm-s-default .cm-link {
     color: #00c;
 }
+
 .cm-s-default .cm-error {
     color: #f00;
 }
+
 .cm-invalidchar {
     color: #f00;
 }
+
 .CodeMirror-composing {
     border-bottom: 2px solid;
 }
@@ -588,12 +708,15 @@ button a:hover:not(.active) {
 div.CodeMirror span.CodeMirror-matchingbracket {
     color: #0f0;
 }
+
 div.CodeMirror span.CodeMirror-nonmatchingbracket {
     color: #f22;
 }
+
 .CodeMirror-matchingtag {
     background: rgba(255, 150, 0, .3);
 }
+
 .CodeMirror-activeline-background {
     background: #e8f2ff;
 }
@@ -605,6 +728,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     overflow  : hidden;
     background: rgba(255, 255, 255, 0.6);
 }
+
 .CodeMirror-scroll {
     overflow      : scroll !important;
     /* Things will break if this is overridden */
@@ -618,6 +742,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     /* Prevent dragging from highlighting the element */
     position      : relative;
 }
+
 .CodeMirror-sizer {
     border-right: 30px solid transparent;
 }
@@ -632,26 +757,31 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     z-index : 6;
     display : none;
 }
+
 .CodeMirror-vscrollbar {
     right     : 0;
     top       : 0;
     overflow-x: hidden;
     overflow-y: scroll;
 }
+
 .CodeMirror-hscrollbar {
     bottom    : 0;
     left      : 0;
     overflow-y: hidden;
     overflow-x: scroll;
 }
+
 .CodeMirror-scrollbar-filler {
     right : 0;
     bottom: 0;
 }
+
 .CodeMirror-gutter-filler {
     left  : 0;
     bottom: 0;
 }
+
 .CodeMirror-gutters {
     position  : absolute;
     left      : 0;
@@ -659,6 +789,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     min-height: 100%;
     z-index   : 3;
 }
+
 .CodeMirror-gutter {
     white-space   : normal;
     height        : 100%;
@@ -669,33 +800,39 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     *zoom         : 1;
     *display      : inline;
 }
+
 .CodeMirror-gutter-wrapper {
     position  : absolute;
     z-index   : 4;
     background: none !important;
     border    : none !important;
 }
+
 .CodeMirror-gutter-background {
     position: absolute;
     top     : 0;
     bottom  : 0;
     z-index : 4;
 }
+
 .CodeMirror-gutter-elt {
     position: absolute;
     cursor  : default;
     z-index : 4;
 }
+
 .CodeMirror-gutter-wrapper {
     -webkit-user-select: none;
     -moz-user-select   : none;
     user-select        : none;
 }
+
 .CodeMirror-lines {
     cursor    : text;
     min-height: 1px;
     /* prevents collapsing before first draw */
 }
+
 .CodeMirror pre {
     /* Reset some styles that the rest of the page might have set */
     -moz-border-radius            : 0;
@@ -717,11 +854,13 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     -webkit-font-variant-ligatures: none;
     font-variant-ligatures        : none;
 }
+
 .CodeMirror-wrap pre {
     word-wrap  : break-word;
     white-space: pre-wrap;
     word-break : normal;
 }
+
 .CodeMirror-linebackground {
     position: absolute;
     left    : 0;
@@ -730,12 +869,15 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     bottom  : 0;
     z-index : 0;
 }
+
 .CodeMirror-linewidget {
     position: relative;
     z-index : 2;
     overflow: auto;
 }
+
 .CodeMirror-widget {}
+
 .CodeMirror-code {
     outline: none;
 }
@@ -748,6 +890,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     -moz-box-sizing: content-box;
     box-sizing     : content-box;
 }
+
 .CodeMirror-measure {
     position  : absolute;
     width     : 100%;
@@ -755,42 +898,53 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
     overflow  : hidden;
     visibility: hidden;
 }
+
 .CodeMirror-cursor {
     position: absolute;
 }
+
 .CodeMirror-measure pre {
     position: static;
 }
+
 div.CodeMirror-cursors {
     visibility: hidden;
     position  : relative;
     z-index   : 3;
 }
+
 div.CodeMirror-dragcursors {
     visibility: visible;
 }
+
 .CodeMirror-focused div.CodeMirror-cursors {
     visibility: visible;
 }
+
 .CodeMirror-selected {
     background: #d9d9d9;
 }
+
 .CodeMirror-focused .CodeMirror-selected {
     background: #d7d4f0;
 }
+
 .CodeMirror-crosshair {
     cursor: crosshair;
 }
+
 .CodeMirror-line > span > span::selection,
 .CodeMirror-line > span::selection,
 .CodeMirror-line::selection {
     background: #d7d4f0;
 }
+
 .CodeMirror-line > span > span::-moz-selection,
 .CodeMirror-line > span::-moz-selection,
 .CodeMirror-line::-moz-selection {
     background: #d7d4f0;
 }
+
 .cm-searching {
     background: #ffa;
     background: rgba(255, 255, 0, .4);
@@ -817,9 +971,11 @@ div.CodeMirror-dragcursors {
 span.CodeMirror-selectedtext {
     background: none;
 }
+
 or-selectedtext {
     background: none;
 }
+
 or-selectedtext {
     background: none;
 }

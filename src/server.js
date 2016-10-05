@@ -5,6 +5,8 @@ var json = require('json');
 var bodyParser = require('body-parser');
 var exec = require('child_process').exec;
 var cors = require('cors');
+var temp = require('temp').track(),
+	fs = require('fs');
 
 var whitelist = ['http://ruml.io', 'http://alpha.ruml.io'];
 // ruby installed? implement check
@@ -33,6 +35,13 @@ var corsOptions = {
 		callback(null, originIsWhitelisted);
 	}
 };
+var sandboxcode = "";
+fs.readFile(__dirname + '/rb/sandbox.rb', function(err, data) {
+	if (err) {
+		throw err;
+	}
+	sandboxcode = data.toString();
+});
 
 app.post('/', cors(corsOptions), function(req, res) {
 	var code = req.body.code;
@@ -41,12 +50,14 @@ app.post('/', cors(corsOptions), function(req, res) {
 		return;
 	}
 	if (code.indexOf("ClassDiagram") > -1) {
-		code = "require '" + __dirname + "/rb/_class.rb' \n" + code;
+		code = "require \"" + __dirname + "/rb/_class.rb\" \n" + code;
 	} else if (code.indexOf("ComponentDiagram") > -1) {
-		code = "require '" + __dirname + "/rb/_cmp.rb' \n" + code;
+		code = "require \"" + __dirname + "/rb/_cmp.rb\" \n" + code;
 	} else if (code.indexOf("UseCaseDiagram") > -1) {
-		code = "require '" + __dirname + "/rb/_ucd.rb' \n" + code;
+		code = "require \"" + __dirname + "/rb/_ucd.rb\" \n" + code;
 	}
+	code = replaceAll(code, "'", "\\'");
+	code = sandboxcode + code + "')";
 	code = replaceAll(code, '"', '\\"');
 	code = code.replace(/(\r\n|\n|\r)/gm, "\" -e \"");
 	var execcode = 'ruby -e "' + code + '"';
