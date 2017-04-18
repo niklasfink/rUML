@@ -4,6 +4,8 @@
 [![Dependency Status][dependencies-img-link]][dependencies-link] [![Gitter](https://badges.gitter.im/niklasfink/rUML.svg)](https://gitter.im/niklasfink/rUML?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
 # rUML
+
+[![Join the chat at https://gitter.im/niklasfink/rUML](https://badges.gitter.im/niklasfink/rUML.svg)](https://gitter.im/niklasfink/rUML?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 A ruby to UML generator: Insert ruby object definitions on the one side, get a automatical aligned UML diagram on the other side.
 
 ## Example
